@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
+using Microsoft.AspNet.StaticFiles;
 using Microsoft.Framework.DependencyInjection;
 
 namespace VitalitySquaresProbability
@@ -20,10 +21,7 @@ namespace VitalitySquaresProbability
             // Add the platform handler to the request pipeline.
             app.UseIISPlatformHandler();
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            app.UseFileServer();
         }
     }
 }
