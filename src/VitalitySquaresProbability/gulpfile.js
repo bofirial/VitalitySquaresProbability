@@ -8,6 +8,7 @@ var gulp = require("gulp"),
     sass = require("gulp-sass"),
     sourcemaps = require("gulp-sourcemaps"),
     typescript = require('gulp-typescript'),
+    shell = require("gulp-shell"),
     project = require("./project.json");
 
 gulp.task("clean:js", function (cb) {
@@ -25,12 +26,12 @@ gulp.task("min:js", function () {
     var tsProject = typescript.createProject('./wwwroot/typescript/tsconfig.json');
 
     var tsResult = tsProject.src(["./wwwroot/typescript/**/*.ts"]) //, "!./wwwroot/typescript/**/*.spec.ts"])
-        .pipe(sourcemaps.init())
+        //.pipe(sourcemaps.init())
         .pipe(typescript(tsProject));
     return tsResult
-        .pipe(uglify())
+        //.pipe(uglify())
         //.pipe(concat("./wwwroot/js/site.min.js"))
-        .pipe(sourcemaps.write("."))
+        //.pipe(sourcemaps.write("."))
         .pipe(gulp.dest("./wwwroot/js"));
 });
 
@@ -39,7 +40,7 @@ gulp.task("min:css", function () {
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         //.pipe(concat("./wwwroot/css/site.min.css"))
-        .pipe(cssmin())
+        //.pipe(cssmin())
         .pipe(sourcemaps.write("."))
         .pipe(gulp.dest("./wwwroot/css"));
 });
@@ -51,7 +52,7 @@ gulp.task("watch", function() {
     gulp.watch("./wwwroot/sass/**/*.scss", ['min:css']);
 });
 
-//gulp.task('watch2', shell.task(['dnx-watch web']));
+gulp.task('dnxWatch', shell.task(['dnx-watch web']));
 
 gulp.task("lib", function() {
     gulp.src("./node_modules/angular2/bundles/**/*")

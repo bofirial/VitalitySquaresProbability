@@ -12,6 +12,7 @@
     "rimraf": "2.2.8",
     "angular2": "2.0.0-alpha.44",
     "systemjs": "0.19.5",
-    "jasmine-core": "2.3.4"
+    "jasmine-core": "2.3.4",
+    "gulp-shell": "0.5.0"
   }
 }
