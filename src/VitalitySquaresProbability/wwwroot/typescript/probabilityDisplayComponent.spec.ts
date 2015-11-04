@@ -5,7 +5,7 @@ import {it, injectAsync, TestComponentBuilder} from 'angular2/testing';
 
 import {getComponentMetadata} from "./test/testUtilities";
 
-import {ProbabilityDisplayComponent} from "./probabilityDisplay";
+import {ProbabilityDisplayComponent} from "./probabilityDisplayComponent";
 
 describe('Probability Display Component', () => {
 

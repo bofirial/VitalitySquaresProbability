@@ -1,7 +1,7 @@
 ﻿/// <reference path="./../../node_modules/angular2/angular2.d.ts" />
 
 import {Component} from 'angular2/angular2';
-import {ProbabilityDisplayComponent} from "./probabilityDisplay";
+import {ProbabilityDisplayComponent} from "./probabilityDisplayComponent";
 
 @Component({
     selector: 'vsp',

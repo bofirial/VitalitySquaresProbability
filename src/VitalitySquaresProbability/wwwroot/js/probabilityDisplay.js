@@ -15,11 +15,49 @@ var ProbabilityDisplayComponent = (function () {
     function ProbabilityDisplayComponent() {
         this.chanceForNextSquareToBeFruit = 0.5;
         this.chanceForNextSquareToBeJunk = 0.5;
+        this.fruitStats = [
+            {
+                numFruit: 0,
+                exactProbability: 0,
+                atLeastProbability: 1
+            },
+            {
+                numFruit: 1,
+                exactProbability: 0,
+                atLeastProbability: 1
+            },
+            {
+                numFruit: 2,
+                exactProbability: 0,
+                atLeastProbability: 1
+            },
+            {
+                numFruit: 3,
+                exactProbability: 0,
+                atLeastProbability: 1
+            },
+            {
+                numFruit: 4,
+                exactProbability: 0,
+                atLeastProbability: 1
+            },
+            {
+                numFruit: 5,
+                exactProbability: 0,
+                atLeastProbability: 1
+            },
+            {
+                numFruit: 6,
+                exactProbability: 0,
+                atLeastProbability: 1
+            }
+        ];
     }
     ProbabilityDisplayComponent = __decorate([
         angular2_1.Component({
             selector: 'probability-display',
-            templateUrl: 'templates/probabilityDisplay.html'
+            templateUrl: 'templates/probabilityDisplay.html',
+            directives: [angular2_1.CORE_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])
     ], ProbabilityDisplayComponent);

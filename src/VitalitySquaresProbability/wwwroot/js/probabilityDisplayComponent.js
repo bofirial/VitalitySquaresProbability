@@ -11,19 +11,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var angular2_1 = require('angular2/angular2');
-var probabilityDisplayComponent_1 = require("./probabilityDisplayComponent");
-var VspComponent = (function () {
-    function VspComponent() {
-        this.title = 'Vitality Squares Probability';
+var probabilityDisplayService_1 = require('./probabilityDisplayService');
+var ProbabilityDisplayComponent = (function () {
+    function ProbabilityDisplayComponent(probabilityDisplayService) {
+        this.probabilityStatistics = probabilityDisplayService.getProbabilityDisplayStatistics();
     }
-    VspComponent = __decorate([
+    ProbabilityDisplayComponent = __decorate([
         angular2_1.Component({
-            selector: 'vsp',
-            template: "\n    <h1>{{title}}</h1>\n    <probability-display></probability-display>\n    ",
-            directives: [probabilityDisplayComponent_1.ProbabilityDisplayComponent]
+            selector: 'probability-display',
+            templateUrl: 'templates/probabilityDisplay.html',
+            directives: [angular2_1.CORE_DIRECTIVES]
         }), 
-        __metadata('design:paramtypes', [])
-    ], VspComponent);
-    return VspComponent;
+        __metadata('design:paramtypes', [probabilityDisplayService_1.ProbabilityDisplayService])
+    ], ProbabilityDisplayComponent);
+    return ProbabilityDisplayComponent;
 })();
-exports.VspComponent = VspComponent;
+exports.ProbabilityDisplayComponent = ProbabilityDisplayComponent;
