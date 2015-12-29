@@ -1,1 +1,1 @@
-{"version":3,"sources":["site.scss","_variables.scss"],"names":[],"mappings":"AAGA,IAAI,CAAC;EACD,KAAK,ECHF,OAAO,GDIb","file":"site.css","sourcesContent":["\r\n@import \"_variables.scss\";\r\n\r\nbody {\r\n    color: $test;\r\n}\r\n","\r\n$test: #ff0000;"],"sourceRoot":"/source/"}
+{"version":3,"sources":["../../stdin","_variables.scss"],"names":[],"mappings":"AAGA,IAAI,CAAC;EACD,KAAK,ECHF,OAAO,GDIb","file":"site.css","sourcesContent":[null,"\r\n$test: #ff0000;"],"sourceRoot":"/source/"}

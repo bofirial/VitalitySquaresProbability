@@ -9,9 +9,8 @@ export class VitalitySquareItem {
 }
 
 export class VitalitySquaresSettings{
-    gridRows: number;
-    gridColumns: number;
-    gridItems: Array<VitalitySquareItem>
+    remainingSelections: number;
+    gridItems: Array<VitalitySquareItem>;
 }
 
 @Injectable()
@@ -19,8 +18,7 @@ export class VitalitySquaresSettingsService {
 
     constructor() {
         this.vitalitySquaresSettings = {
-            gridRows: 3,
-            gridColumns: 4,
+            remainingSelections: 6,
             gridItems: [
                 {
                     name: "Fruit",

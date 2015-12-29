@@ -3,6 +3,7 @@
 import {bootstrap} from 'angular2/angular2';
 import {VspComponent} from "./vitalitySquaresProbability";
 import {ProbabilityDisplayService} from "./probabilityDisplayService";
+import {ProbabilityCalculationService} from "./probabilityCalculationService";
 import {VitalitySquaresSettingsService} from "./vitalitySquaresSettingsService";
 
-bootstrap(VspComponent, [ProbabilityDisplayService, VitalitySquaresSettingsService]);
+bootstrap(VspComponent, [ProbabilityCalculationService, ProbabilityDisplayService, VitalitySquaresSettingsService]);
