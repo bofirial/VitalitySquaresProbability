@@ -47,29 +47,29 @@ export class ProbabilityDisplayService {
     }
 
     private getAtLeastProbabilityOfOutcome(vitalitySquareItem: VitalitySquareItem, outcome: number, totalRemainingItems: number, remainingSelections: number): number {
-        
-        var total = 0;
 
-        for (var i = outcome; i <= vitalitySquareItem.total; i++) {
+        let total = 0;
+
+        for (let i = outcome; i <= vitalitySquareItem.total; i++) {
             total += this.getExactProbabilityOfOutcome(vitalitySquareItem, i, totalRemainingItems, remainingSelections);
         }
-        console.log("");
+
         return total;
     }
 
     getProbabilityDisplayStatistics(): Array<ProbabilityDisplayStatistics> {
 
-        let probabilityDisplayStatistics = new Array<ProbabilityDisplayStatistics>();
+        var probabilityDisplayStatistics = new Array<ProbabilityDisplayStatistics>();
         var totalRemainingItems = this.vitalitySquaresSettingsService.getTotalRemainingItems();
 
-        for (var vitalitySquareItem of this.vitalitySquaresSettings.gridItems) {
-            var currentItemStatistics = {
+        for (let vitalitySquareItem of this.vitalitySquaresSettings.gridItems) {
+            var currentItemStatistics: any  = {
                 squareType: vitalitySquareItem.name,
                 probabilityOfNextSquare: this.getProbabilityOfNextSquare(vitalitySquareItem),
                 outcomes: []
             };
 
-            for (var i = 0; i < vitalitySquareItem.total + 1; i++) {
+            for (let i = 0; i < vitalitySquareItem.total + 1; i++) {
                 currentItemStatistics.outcomes.push({
                     numSquares: i,
                     exactProbability: this.getExactProbabilityOfOutcome(vitalitySquareItem, i, totalRemainingItems, this.vitalitySquaresSettings.remainingSelections),
