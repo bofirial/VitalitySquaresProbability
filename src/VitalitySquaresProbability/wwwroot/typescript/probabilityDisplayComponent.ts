@@ -1,6 +1,6 @@
-﻿/// <reference path="./../../node_modules/angular2/angular2.d.ts" />
-
-import {Component, CORE_DIRECTIVES} from 'angular2/angular2';
+﻿
+import {Component} from 'angular2/core';
+import {CORE_DIRECTIVES} from 'angular2/common';
 
 import {ProbabilityDisplayService, ProbabilityDisplayStatistics} from './probabilityDisplayService';
 

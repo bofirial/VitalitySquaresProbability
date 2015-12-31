@@ -1,6 +1,5 @@
-﻿/// <reference path="./../../node_modules/angular2/angular2.d.ts" />
-
-import {bootstrap} from 'angular2/angular2';
+﻿
+import {bootstrap} from 'angular2/platform/browser';
 import {VspComponent} from "./vitalitySquaresProbability";
 import {ProbabilityDisplayService} from "./probabilityDisplayService";
 import {ProbabilityCalculationService} from "./probabilityCalculationService";

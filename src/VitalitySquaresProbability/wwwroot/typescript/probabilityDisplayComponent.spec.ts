@@ -1,6 +1,4 @@
-﻿/// <reference path="./../../node_modules/angular2/angular2.d.ts" />
-/// <reference path="./../../node_modules/angular2/testing.d.ts" />
-
+﻿
 import {it, injectAsync, TestComponentBuilder} from 'angular2/testing';
 
 import {getComponentMetadata} from "./test/testUtilities";
