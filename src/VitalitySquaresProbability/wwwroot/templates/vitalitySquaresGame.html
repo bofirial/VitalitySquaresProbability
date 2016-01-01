@@ -4,9 +4,9 @@
         <p>{{remainingSelections}} Selections Remaining</p>
     </div>
     <div class="gameBoard">
-        <a class="vitalitySquare" href="javascript:void(0)" *ngFor="#vitalitySquare of vitalitySquares">{{vitalitySquare.squareType}}</a>
+        <a class="vitalitySquare" href="javascript:void(0)" (click)="selectVitalitySquare(vitalitySquare)" *ngFor="#vitalitySquare of vitalitySquares">{{vitalitySquare.squareType}}</a>
     </div>
     <div class="buttons">
-        <button>Reset</button>
+        <button (click)="resetGameBoard()">Reset</button>
     </div>
 </div>

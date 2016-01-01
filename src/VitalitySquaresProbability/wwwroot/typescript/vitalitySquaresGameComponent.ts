@@ -2,11 +2,7 @@
 import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
-import {VitalitySquaresSettingsService, VitalitySquaresSettings, VitalitySquareItem} from './vitalitySquaresSettingsService';
-
-export class VitalitySquare {
-    squareType: string;
-}
+import {VitalitySquaresGameService, VitalitySquare} from './vitalitySquaresGameService';
 
 @Component({
     selector: 'vitality-squares-game',
@@ -16,19 +12,26 @@ export class VitalitySquare {
 })
 export class VitalitySquaresGameComponent {
 
-    constructor(vitalitySquaresSettingsService: VitalitySquaresSettingsService) {
-        this.remainingSelections = 6;
+    constructor(vitalitySquaresGameService: VitalitySquaresGameService) {
+        this.remainingSelections = vitalitySquaresGameService.getRemainingSelections();
 
-        var totalVitalitySquares = vitalitySquaresSettingsService.getTotalItems();
+        this.vitalitySquares = vitalitySquaresGameService.createVitalitySquares();
 
-        this.vitalitySquares = [];
-
-        for (var i = 0; i < totalVitalitySquares; i++) {
-            this.vitalitySquares.push({squareType:'blank'});
-        }
+        this.vitalitySquaresGameService = vitalitySquaresGameService;
     }
+
+    private vitalitySquaresGameService: VitalitySquaresGameService;
 
     remainingSelections: number;
     vitalitySquares: Array<VitalitySquare>;
 
+    selectVitalitySquare(vitalitySquare: VitalitySquare): void {
+        var newVitalitySquare = this.vitalitySquaresGameService.getRandomRemainingVitalitySquare();
+
+        vitalitySquare.squareType = newVitalitySquare.squareType;
+    }
+
+    resetGameBoard(): void {
+        console.log("Resetting the Game Board");
+    }
 }

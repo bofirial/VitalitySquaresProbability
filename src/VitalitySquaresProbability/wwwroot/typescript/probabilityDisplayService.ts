@@ -25,9 +25,9 @@ export class ProbabilityDisplayService {
         this.probabilityCalculationService = probabilityCalculationService;
     }
 
-    vitalitySquaresSettings: VitalitySquaresSettings;
-    vitalitySquaresSettingsService: VitalitySquaresSettingsService;
-    probabilityCalculationService: ProbabilityCalculationService;
+    private vitalitySquaresSettings: VitalitySquaresSettings;
+    private vitalitySquaresSettingsService: VitalitySquaresSettingsService;
+    private probabilityCalculationService: ProbabilityCalculationService;
 
     private getProbabilityOfNextSquare(vitalitySquareItem: VitalitySquareItem): number {
         

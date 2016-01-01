@@ -26,12 +26,12 @@ gulp.task("min:js", function () {
     var tsProject = typescript.createProject('./wwwroot/typescript/tsconfig.json');
 
     var tsResult = tsProject.src(["./wwwroot/typescript/**/*.ts"]) //, "!./wwwroot/typescript/**/*.spec.ts"])
-        .pipe(sourcemaps.init())
+        //.pipe(sourcemaps.init())
         .pipe(typescript(tsProject));
     return tsResult
-        .pipe(uglify())
+        //.pipe(uglify())
         //.pipe(concat("./wwwroot/js/site.min.js"))
-        .pipe(sourcemaps.write("."))
+        //.pipe(sourcemaps.write("."))
         .pipe(gulp.dest("./wwwroot/js"));
 });
 

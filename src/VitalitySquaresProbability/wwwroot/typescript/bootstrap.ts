@@ -4,5 +4,6 @@ import {VspComponent} from "./vitalitySquaresProbability";
 import {ProbabilityDisplayService} from "./probabilityDisplayService";
 import {ProbabilityCalculationService} from "./probabilityCalculationService";
 import {VitalitySquaresSettingsService} from "./vitalitySquaresSettingsService";
+import {VitalitySquaresGameService} from "./vitalitySquaresGameService";
 
-bootstrap(VspComponent, [ProbabilityCalculationService, ProbabilityDisplayService, VitalitySquaresSettingsService]);
+bootstrap(VspComponent, [ProbabilityCalculationService, ProbabilityDisplayService, VitalitySquaresSettingsService, VitalitySquaresGameService]);
