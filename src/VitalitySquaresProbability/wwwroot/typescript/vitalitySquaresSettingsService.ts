@@ -1,5 +1,7 @@
 ﻿
-import {Injectable} from 'angular2/core';
+import {Injectable, EventEmitter} from 'angular2/core';
+
+import {copyObject} from './utilities';
 
 export class VitalitySquareItem {
     name: string;
@@ -9,6 +11,7 @@ export class VitalitySquareItem {
 
 export class VitalitySquaresSettings{
     remainingSelections: number;
+    totalSelections: number;
     gridItems: Array<VitalitySquareItem>;
 }
 
@@ -18,6 +21,7 @@ export class VitalitySquaresSettingsService {
     constructor() {
         this.vitalitySquaresSettings = {
             remainingSelections: 6,
+            totalSelections: 6,
             gridItems: [
                 {
                     name: "Fruit",
@@ -31,13 +35,17 @@ export class VitalitySquaresSettingsService {
                 }
             ]
         };
+
+        this.eventEmitter = new EventEmitter(false);
     }
 
-    vitalitySquaresSettings: VitalitySquaresSettings;
+    private eventEmitter: EventEmitter<VitalitySquaresSettings>;
+
+    private vitalitySquaresSettings: VitalitySquaresSettings;
 
     getSettings(): VitalitySquaresSettings {
 
-        return this.vitalitySquaresSettings;
+        return copyObject(this.vitalitySquaresSettings);
     }
 
     getTotalRemainingItems(): number {
@@ -58,5 +66,15 @@ export class VitalitySquaresSettingsService {
         }
 
         return total;
+    }
+
+    saveSettings(vitalitySquaresSettings: VitalitySquaresSettings): void {
+        this.vitalitySquaresSettings = vitalitySquaresSettings;
+
+        this.eventEmitter.next(this.vitalitySquaresSettings);
+    } 
+
+    subscribeToUpdates(callback : (vitalitySquareSettings: VitalitySquaresSettings) => void): void {
+        this.eventEmitter.subscribe(callback);
     }
 }

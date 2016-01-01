@@ -13,7 +13,13 @@ import {ProbabilityDisplayService, ProbabilityDisplayStatistics} from './probabi
 export class ProbabilityDisplayComponent {
 
     constructor(probabilityDisplayService: ProbabilityDisplayService) {
-        this.probabilityStatistics = probabilityDisplayService.getProbabilityDisplayStatistics();
+        this.getProbabilityStatistics(probabilityDisplayService.getProbabilityDisplayStatistics());
+
+        probabilityDisplayService.subscribeToUpdates(this.getProbabilityStatistics.bind(this));
+    }
+
+    private getProbabilityStatistics(probabilityStatistics : Array<ProbabilityDisplayStatistics>): void {
+        this.probabilityStatistics = probabilityStatistics;
     }
 
     probabilityStatistics: Array<ProbabilityDisplayStatistics>;

@@ -13,11 +13,17 @@ import {VitalitySquaresGameService, VitalitySquare} from './vitalitySquaresGameS
 export class VitalitySquaresGameComponent {
 
     constructor(vitalitySquaresGameService: VitalitySquaresGameService) {
-        this.remainingSelections = vitalitySquaresGameService.getRemainingSelections();
-
-        this.vitalitySquares = vitalitySquaresGameService.createVitalitySquares();
-
         this.vitalitySquaresGameService = vitalitySquaresGameService;
+
+        this.setRemainingSelections(this.vitalitySquaresGameService.getRemainingSelections());
+        this.resetGameBoard();
+
+        this.vitalitySquaresGameService.subscribeToUpdates(this.setRemainingSelections.bind(this));
+    }
+
+    private setRemainingSelections(remainingSelections: number): void {
+        
+        this.remainingSelections = remainingSelections;
     }
 
     private vitalitySquaresGameService: VitalitySquaresGameService;
@@ -26,12 +32,17 @@ export class VitalitySquaresGameComponent {
     vitalitySquares: Array<VitalitySquare>;
 
     selectVitalitySquare(vitalitySquare: VitalitySquare): void {
-        var newVitalitySquare = this.vitalitySquaresGameService.getRandomRemainingVitalitySquare();
+        if (this.remainingSelections > 0 && vitalitySquare.squareType == "blank") {
+            var newVitalitySquare = this.vitalitySquaresGameService.getRandomRemainingVitalitySquare();
 
-        vitalitySquare.squareType = newVitalitySquare.squareType;
+            vitalitySquare.squareType = newVitalitySquare.squareType;
+        }
     }
 
     resetGameBoard(): void {
-        console.log("Resetting the Game Board");
+
+        this.vitalitySquaresGameService.resetGameBoard();
+
+        this.vitalitySquares = this.vitalitySquaresGameService.createVitalitySquares();
     }
 }

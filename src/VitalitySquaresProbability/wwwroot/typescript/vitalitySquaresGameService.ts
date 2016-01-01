@@ -55,6 +55,28 @@ export class VitalitySquaresGameService {
             }
         }
 
+        settings.remainingSelections--;
+        
+        this.vitalitySquaresSettingsService.saveSettings(settings);
+
         return vitalitySquare;
+    }
+
+    resetGameBoard(): void {
+        var settings = this.vitalitySquaresSettingsService.getSettings();
+
+        for (let gridItem of settings.gridItems) {
+            gridItem.remaining = gridItem.total;
+        }
+
+        settings.remainingSelections = settings.totalSelections;
+
+        this.vitalitySquaresSettingsService.saveSettings(settings);
+    }
+
+    subscribeToUpdates(callback: (remainingSelections : number) => void): void {
+        this.vitalitySquaresSettingsService.subscribeToUpdates((vitalitySquareSettings) => {
+            callback(vitalitySquareSettings.remainingSelections);
+        });
     }
 }

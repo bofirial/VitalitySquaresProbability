@@ -21,11 +21,9 @@ export class ProbabilityDisplayService {
 
     constructor(vitalitySquaresSettingsService: VitalitySquaresSettingsService, probabilityCalculationService: ProbabilityCalculationService ) {
         this.vitalitySquaresSettingsService = vitalitySquaresSettingsService;
-        this.vitalitySquaresSettings = vitalitySquaresSettingsService.getSettings();
         this.probabilityCalculationService = probabilityCalculationService;
     }
-
-    private vitalitySquaresSettings: VitalitySquaresSettings;
+    
     private vitalitySquaresSettingsService: VitalitySquaresSettingsService;
     private probabilityCalculationService: ProbabilityCalculationService;
 
@@ -60,19 +58,24 @@ export class ProbabilityDisplayService {
 
         var probabilityDisplayStatistics = new Array<ProbabilityDisplayStatistics>();
         var totalRemainingItems = this.vitalitySquaresSettingsService.getTotalRemainingItems();
+        var vitalitySquaresSettings = this.vitalitySquaresSettingsService.getSettings();
 
-        for (let vitalitySquareItem of this.vitalitySquaresSettings.gridItems) {
-            var currentItemStatistics: any  = {
+        for (let vitalitySquareItem of vitalitySquaresSettings.gridItems) {
+            var currentItemStatistics: ProbabilityDisplayStatistics  = {
                 squareType: vitalitySquareItem.name,
                 probabilityOfNextSquare: this.getProbabilityOfNextSquare(vitalitySquareItem),
                 outcomes: []
             };
 
+            if (vitalitySquaresSettings.remainingSelections <= 0) {
+                currentItemStatistics.probabilityOfNextSquare = 0;
+            }
+
             for (let i = 0; i < vitalitySquareItem.total + 1; i++) {
                 currentItemStatistics.outcomes.push({
                     numSquares: i,
-                    exactProbability: this.getExactProbabilityOfOutcome(vitalitySquareItem, i, totalRemainingItems, this.vitalitySquaresSettings.remainingSelections),
-                    atLeastProbability: this.getAtLeastProbabilityOfOutcome(vitalitySquareItem, i, totalRemainingItems, this.vitalitySquaresSettings.remainingSelections)
+                    exactProbability: this.getExactProbabilityOfOutcome(vitalitySquareItem, i, totalRemainingItems, vitalitySquaresSettings.remainingSelections),
+                    atLeastProbability: this.getAtLeastProbabilityOfOutcome(vitalitySquareItem, i, totalRemainingItems, vitalitySquaresSettings.remainingSelections)
                 });
             }
 
@@ -80,6 +83,11 @@ export class ProbabilityDisplayService {
         }
 
         return probabilityDisplayStatistics;
-        
+    }
+
+    subscribeToUpdates(callback: (probabilityDisplayStatistics: Array<ProbabilityDisplayStatistics>) => void): void {
+        this.vitalitySquaresSettingsService.subscribeToUpdates((vitalitySquareSettings) => {
+            callback(this.getProbabilityDisplayStatistics());
+        });
     }
 }
