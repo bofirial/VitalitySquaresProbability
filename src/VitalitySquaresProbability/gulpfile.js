@@ -61,4 +61,6 @@ gulp.task("lib", function() {
         .pipe(gulp.dest("./wwwroot/js/lib/system"));
     gulp.src("./node_modules/jasmine-core/lib/jasmine-core/**/*")
         .pipe(gulp.dest("./wwwroot/js/lib/jasmine"));
+    gulp.src("./node_modules/rxjs/bundles/**/*")
+        .pipe(gulp.dest("./wwwroot/js/lib/rxjs"));
 });

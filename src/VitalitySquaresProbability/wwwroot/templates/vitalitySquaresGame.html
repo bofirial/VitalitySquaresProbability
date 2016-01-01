@@ -1,0 +1,12 @@
+﻿
+<div class="vitalitySquaresGame">
+    <div class="remainingSelections">
+        <p>{{remainingSelections}} Selections Remaining</p>
+    </div>
+    <div class="gameBoard">
+        <a class="vitalitySquare" href="javascript:void(0)" *ngFor="#vitalitySquare of vitalitySquares">{{vitalitySquare.squareType}}</a>
+    </div>
+    <div class="buttons">
+        <button>Reset</button>
+    </div>
+</div>

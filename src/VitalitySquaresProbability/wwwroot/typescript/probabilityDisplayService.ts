@@ -82,5 +82,4 @@ export class ProbabilityDisplayService {
         return probabilityDisplayStatistics;
         
     }
-
 }

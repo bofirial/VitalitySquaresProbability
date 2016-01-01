@@ -49,4 +49,14 @@ export class VitalitySquaresSettingsService {
 
         return totalRemaining;
     }
+
+    getTotalItems(): number {
+        var total = 0;
+
+        for (var item of this.vitalitySquaresSettings.gridItems) {
+            total += item.total;
+        }
+
+        return total;
+    }
 }

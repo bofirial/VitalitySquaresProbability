@@ -1,10 +1,9 @@
 ﻿
-
 <div class="probabilityDisplay">
     <div class="nextSelectionStats">
-        <p *ng-for="#probStat of probabilityStatistics">Chance for the Next Box to be {{probStat.squareType}}: {{probStat.probabilityOfNextSquare}}</p>
+        <p *ngFor="#probStat of probabilityStatistics">Chance for the Next Box to be {{probStat.squareType}}: {{probStat.probabilityOfNextSquare}}</p>
     </div>
-    <table  *ng-for="#probStat of probabilityStatistics">
+    <table  *ngFor="#probStat of probabilityStatistics">
         <thead>
             <tr>
                 <th></th>
@@ -12,7 +11,7 @@
                 <th>Probability of At Least</th>
             </tr>
         </thead>
-        <tr *ng-for="#outcome of probStat.outcomes">
+        <tr *ngFor="#outcome of probStat.outcomes">
             <td>{{outcome.numSquares}} {{probStat.squareType}}</td>
             <td>{{outcome.exactProbability}}</td>
             <td>{{outcome.atLeastProbability}}</td>
