@@ -4,7 +4,7 @@ import {VitalitySquaresGameComponent} from "./vitalitySquaresGameComponent";
 import {ProbabilityDisplayComponent} from "./probabilityDisplayComponent";
 
 @Component({
-    selector: 'vsp',
+    selector: '.vsp',
     template: `
     <h1>{{title}}</h1>
     <vitality-squares-game></vitality-squares-game>
@@ -12,6 +12,6 @@ import {ProbabilityDisplayComponent} from "./probabilityDisplayComponent";
     `,
     directives: [ProbabilityDisplayComponent, VitalitySquaresGameComponent]
 })
-export class VspComponent {
+export class VitalitySquaresProbabilityComponent {
     public title: string = 'Vitality Squares Probability';
 }

@@ -1,0 +1,8 @@
+﻿
+@import "_variables.scss";
+@import "./lib/bootstrap/_variables.scss";
+@import "./lib/bootstrap/_mixins.scss";
+
+.vsp {
+    @include make-container();
+}

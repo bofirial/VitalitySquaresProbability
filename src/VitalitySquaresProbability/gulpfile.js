@@ -36,7 +36,7 @@ gulp.task("min:js", function () {
 });
 
 gulp.task("min:css", function () {
-    gulp.src(["./wwwroot/sass/**/*.scss"])
+    gulp.src(["./wwwroot/scss/**/*.scss"])
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         //.pipe(concat("./wwwroot/css/site.min.css"))
@@ -49,7 +49,7 @@ gulp.task("min", ["min:js", "min:css"]);
 
 gulp.task("watch", function() {
     gulp.watch("./wwwroot/typescript/**/*.ts", ['min:js']);
-    gulp.watch("./wwwroot/sass/**/*.scss", ['min:css']);
+    gulp.watch("./wwwroot/scss/**/*.scss", ['min:css']);
 });
 
 gulp.task('dnxWatch', shell.task(['dnx-watch web']));
@@ -63,4 +63,14 @@ gulp.task("lib", function() {
         .pipe(gulp.dest("./wwwroot/js/lib/jasmine"));
     gulp.src("./node_modules/rxjs/bundles/**/*")
         .pipe(gulp.dest("./wwwroot/js/lib/rxjs"));
+    gulp.src("./node_modules/bootstrap/scss/**/*")
+        .pipe(gulp.dest("./wwwroot/scss/lib/bootstrap"));
+    gulp.src("./node_modules/bootstrap/dist/js/**/*")
+        .pipe(gulp.dest("./wwwroot/js/lib/bootstrap"));
+    gulp.src("./node_modules/jquery/dist/**/*")
+        .pipe(gulp.dest("./wwwroot/js/lib/jquery"));
+    gulp.src("./node_modules/tether/dist/js/**/*")
+        .pipe(gulp.dest("./wwwroot/js/lib/tether"));
+    gulp.src("./node_modules/tether/dist/css/**/*")
+        .pipe(gulp.dest("./wwwroot/css/lib/tether"));
 });
