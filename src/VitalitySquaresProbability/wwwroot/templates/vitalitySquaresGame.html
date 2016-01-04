@@ -1,6 +1,6 @@
 ﻿
-<p class="gameStatistics alert font-weight-bold clearfix">
-    <span class="remainingSelections">{{remainingSelections}} Selections Remaining</span>
+<p class="gameStatistics alert clearfix">
+    <span class="remainingSelections font-weight-bold">{{remainingSelections}} Selections Remaining</span>
     <span class="squareTotals pull-xs-right">
         <span *ngFor="#vitalitySquareConfiguration of vitalitySquareConfigurations" class="{{vitalitySquareConfiguration.color}}">
             {{vitalitySquareConfiguration.total - vitalitySquareConfiguration.remaining}} <i class="{{vitalitySquareConfiguration.icon}}"></i>
@@ -9,7 +9,7 @@
 </p>
 <div class="gameBoard row {{remainingSelections < 1 ? 'disabled' : ''}}">
     <div class="vitalitySquare col-xs-3 {{vitalitySquare.color}}" *ngFor="#vitalitySquare of vitalitySquares">
-        <a href="#" (click)="selectVitalitySquare(vitalitySquare)" class="{{vitalitySquare.squareType}}">
+        <a href="#" (click)="selectVitalitySquare(vitalitySquare, $event)" class="{{vitalitySquare.squareType}}">
             <i class="{{vitalitySquare.icon}}"></i>
         </a>
     </div>

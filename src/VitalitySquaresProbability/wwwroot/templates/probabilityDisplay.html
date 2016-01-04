@@ -1,7 +1,9 @@
 ﻿
 <div class="itemStatistics {{probStat.color}}" *ngFor="#probStat of probabilityStatistics">
-    <a class="btn center-block" data-toggle="collapse" href="#detail-{{probStat.id}}" aria-expanded="false">Chance for the Next Box to be <i class="{{probStat.icon}}"></i>: {{probStat.probabilityOfNextSquare | percent}}</a>
-    <div class="collapse" id="detail-{{probStat.id}}">
+    <a class="btn center-block" data-toggle="collapse" href="#" (click)="probStat.showDetails = !probStat.showDetails">
+        Chance for the Next Box to be <i class="{{probStat.icon}}"></i>: {{probStat.probabilityOfNextSquare | percent}}
+    </a>
+    <collapsiblePanel [isExpanded]="probStat.showDetails">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -16,5 +18,5 @@
                 <td>{{outcome.atLeastProbability | percent}}</td>
             </tr>
         </table>
-    </div>
+    </collapsiblePanel>
 </div>

@@ -32,7 +32,7 @@ vsp, vitality-squares-game, probability-display {
         }
 
         &.yellow {
-            color: $yellow-500;
+            color: $yellow-800;
         }
 
         &.blue {
@@ -94,9 +94,9 @@ vsp, vitality-squares-game, probability-display {
 
     &.yellow {
         a {
-            color: $yellow-500;
+            color: $yellow-800;
             background-color: $yellow-200;
-            border-color: $yellow-500;
+            border-color: $yellow-800;
             cursor: default;
 
             &:hover {

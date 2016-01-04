@@ -72,15 +72,8 @@ export class VitalitySquaresGameService {
     }
 
     resetGameBoard(): void {
-        var settings = this.vitalitySquaresSettingsService.getSettings();
 
-        for (let gridItem of settings.gridItems) {
-            gridItem.remaining = gridItem.total;
-        }
-
-        settings.remainingSelections = settings.totalSelections;
-
-        this.vitalitySquaresSettingsService.saveSettings(settings);
+        this.vitalitySquaresSettingsService.resetSettings();
     }
 
     subscribeToUpdates(callback: (vitalitySquaresSettings: VitalitySquaresSettings) => void): void {

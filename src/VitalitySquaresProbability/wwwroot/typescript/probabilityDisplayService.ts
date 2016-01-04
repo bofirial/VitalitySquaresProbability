@@ -16,6 +16,7 @@ export class ProbabilityDisplayStatistics {
     id: number;
     probabilityOfNextSquare: number;
     outcomes: Array<Outcome>;
+    showDetails: boolean;
 }
 
 @Injectable()
@@ -68,7 +69,8 @@ export class ProbabilityDisplayService {
                 color: vitalitySquareItem.color,
                 icon: vitalitySquareItem.icon,
                 probabilityOfNextSquare: this.getProbabilityOfNextSquare(vitalitySquareItem),
-                outcomes: []
+                outcomes: [],
+                showDetails: false
             };
 
             if (vitalitySquaresSettings.remainingSelections <= 0) {

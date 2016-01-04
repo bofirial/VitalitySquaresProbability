@@ -34,7 +34,8 @@ export class VitalitySquaresGameComponent {
     vitalitySquares: Array<VitalitySquare>;
     vitalitySquareConfigurations: Array<VitalitySquareItem>;
 
-    selectVitalitySquare(vitalitySquare: VitalitySquare): void {
+    selectVitalitySquare(vitalitySquare: VitalitySquare, $event : Event): void {
+
         if (this.remainingSelections > 0 && vitalitySquare.color == "") {
             var newVitalitySquare = this.vitalitySquaresGameService.getRandomRemainingVitalitySquare();
             
