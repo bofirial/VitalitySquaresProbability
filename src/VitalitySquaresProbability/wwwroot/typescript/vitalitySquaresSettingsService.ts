@@ -4,9 +4,11 @@ import {Injectable, EventEmitter} from 'angular2/core';
 import {copyObject} from './utilities';
 
 export class VitalitySquareItem {
-    name: string;
     total: number;
     remaining: number;
+    color: string;
+    icon: string;
+    id: number;
 }
 
 export class VitalitySquaresSettings{
@@ -24,14 +26,18 @@ export class VitalitySquaresSettingsService {
             totalSelections: 6,
             gridItems: [
                 {
-                    name: "Fruit",
                     total: 6,
-                    remaining: 6
+                    remaining: 6,
+                    color: 'green',
+                    icon: 'flaticon-apple55',
+                    id: 1
                 },
                 {
-                    name: "Junk Food",
                     total: 6,
-                    remaining: 6
+                    remaining: 6,
+                    color: 'orange',
+                    icon: 'flaticon-fast-food',
+                    id: 2
                 }
             ]
         };

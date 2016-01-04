@@ -1,20 +1,20 @@
 ﻿
-<div class="probabilityDisplay">
-    <div class="nextSelectionStats">
-        <p *ngFor="#probStat of probabilityStatistics">Chance for the Next Box to be {{probStat.squareType}}: {{probStat.probabilityOfNextSquare}}</p>
-    </div>
-    <table  *ngFor="#probStat of probabilityStatistics">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Probability</th>
-                <th>Probability of At Least</th>
+<div class="itemStatistics {{probStat.color}}" *ngFor="#probStat of probabilityStatistics">
+    <a class="btn center-block" data-toggle="collapse" href="#detail-{{probStat.id}}" aria-expanded="false">Chance for the Next Box to be <i class="{{probStat.icon}}"></i>: {{probStat.probabilityOfNextSquare | percent}}</a>
+    <div class="collapse" id="detail-{{probStat.id}}">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Probability</th>
+                    <th>Probability of At Least</th>
+                </tr>
+            </thead>
+            <tr *ngFor="#outcome of probStat.outcomes">
+                <td class="{{probStat.color}}">{{outcome.numSquares}} <i class="{{probStat.icon}}"></i></td>
+                <td>{{outcome.exactProbability | percent}}</td>
+                <td>{{outcome.atLeastProbability | percent}}</td>
             </tr>
-        </thead>
-        <tr *ngFor="#outcome of probStat.outcomes">
-            <td>{{outcome.numSquares}} {{probStat.squareType}}</td>
-            <td>{{outcome.exactProbability}}</td>
-            <td>{{outcome.atLeastProbability}}</td>
-        </tr>
-    </table>
+        </table>
+    </div>
 </div>

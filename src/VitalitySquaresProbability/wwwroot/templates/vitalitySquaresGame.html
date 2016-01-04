@@ -1,12 +1,19 @@
 ﻿
-<div class="vitalitySquaresGame">
-    <div class="remainingSelections">
-        <p>{{remainingSelections}} Selections Remaining</p>
+<p class="gameStatistics alert font-weight-bold clearfix">
+    <span class="remainingSelections">{{remainingSelections}} Selections Remaining</span>
+    <span class="squareTotals pull-xs-right">
+        <span *ngFor="#vitalitySquareConfiguration of vitalitySquareConfigurations" class="{{vitalitySquareConfiguration.color}}">
+            {{vitalitySquareConfiguration.total - vitalitySquareConfiguration.remaining}} <i class="{{vitalitySquareConfiguration.icon}}"></i>
+        </span>
+    </span>
+</p>
+<div class="gameBoard row {{remainingSelections < 1 ? 'disabled' : ''}}">
+    <div class="vitalitySquare col-xs-3 {{vitalitySquare.color}}" *ngFor="#vitalitySquare of vitalitySquares">
+        <a href="#" (click)="selectVitalitySquare(vitalitySquare)" class="{{vitalitySquare.squareType}}">
+            <i class="{{vitalitySquare.icon}}"></i>
+        </a>
     </div>
-    <div class="gameBoard">
-        <a class="vitalitySquare" href="javascript:void(0)" (click)="selectVitalitySquare(vitalitySquare)" *ngFor="#vitalitySquare of vitalitySquares">{{vitalitySquare.squareType}}</a>
-    </div>
-    <div class="buttons">
-        <button (click)="resetGameBoard()">Reset</button>
-    </div>
+</div>
+<div class="buttons">
+    <button type="button" class="btn btn-danger center-block" (click)="resetGameBoard()">Reset</button>
 </div>

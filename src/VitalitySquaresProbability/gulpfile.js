@@ -11,16 +11,6 @@ var gulp = require("gulp"),
     shell = require("gulp-shell"),
     project = require("./project.json");
 
-gulp.task("clean:js", function (cb) {
-    rimraf("./wwwroot/js/", cb);
-});
-
-gulp.task("clean:css", function (cb) {
-    rimraf("./wwwroot/css/", cb);
-});
-
-gulp.task("clean", ["clean:js", "clean:css"]);
-
 gulp.task("min:js", function () {
 
     var tsProject = typescript.createProject('./wwwroot/typescript/tsconfig.json');

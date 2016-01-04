@@ -11,7 +11,9 @@ export class Outcome {
 }
 
 export class ProbabilityDisplayStatistics {
-    squareType: string;
+    color: string;
+    icon: string;
+    id: number;
     probabilityOfNextSquare: number;
     outcomes: Array<Outcome>;
 }
@@ -62,7 +64,9 @@ export class ProbabilityDisplayService {
 
         for (let vitalitySquareItem of vitalitySquaresSettings.gridItems) {
             var currentItemStatistics: ProbabilityDisplayStatistics  = {
-                squareType: vitalitySquareItem.name,
+                id: vitalitySquareItem.id,
+                color: vitalitySquareItem.color,
+                icon: vitalitySquareItem.icon,
                 probabilityOfNextSquare: this.getProbabilityOfNextSquare(vitalitySquareItem),
                 outcomes: []
             };

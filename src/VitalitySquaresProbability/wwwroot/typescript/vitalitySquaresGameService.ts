@@ -3,7 +3,8 @@
 import {VitalitySquaresSettingsService, VitalitySquaresSettings, VitalitySquareItem} from './vitalitySquaresSettingsService';
 
 export class VitalitySquare {
-    squareType: string;
+    color: string;
+    icon: string;
 }
 
 @Injectable()
@@ -13,10 +14,12 @@ export class VitalitySquaresGameService {
         this.vitalitySquaresSettingsService = vitalitySquaresSettingsService;
     }
 
+    private blankIcon: string = 'flaticon-question30';
+
     private vitalitySquaresSettingsService: VitalitySquaresSettingsService; 
 
-    getRemainingSelections() : number {
-        return this.vitalitySquaresSettingsService.getSettings().remainingSelections;
+    getVitalitySquaresSettings(): VitalitySquaresSettings {
+        return this.vitalitySquaresSettingsService.getSettings();
     }
 
     createVitalitySquares(): Array<VitalitySquare> {
@@ -25,7 +28,10 @@ export class VitalitySquaresGameService {
         var vitalitySquares = [];
 
         for (var i = 0; i < totalVitalitySquares; i++) {
-            vitalitySquares.push({ squareType: 'blank' });
+            vitalitySquares.push({
+                color: '',
+                icon: this.blankIcon
+            });
         }
 
         return vitalitySquares;
@@ -47,7 +53,10 @@ export class VitalitySquaresGameService {
 
             if (randomSquare < currentRemaining) {
 
-                vitalitySquare = { squareType: gridItem.name };
+                vitalitySquare = {
+                    color: gridItem.color,
+                    icon: gridItem.icon
+                };
 
                 gridItem.remaining--;
 
@@ -74,9 +83,9 @@ export class VitalitySquaresGameService {
         this.vitalitySquaresSettingsService.saveSettings(settings);
     }
 
-    subscribeToUpdates(callback: (remainingSelections : number) => void): void {
+    subscribeToUpdates(callback: (vitalitySquaresSettings: VitalitySquaresSettings) => void): void {
         this.vitalitySquaresSettingsService.subscribeToUpdates((vitalitySquareSettings) => {
-            callback(vitalitySquareSettings.remainingSelections);
+            callback(vitalitySquareSettings);
         });
     }
 }
