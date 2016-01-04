@@ -9,7 +9,6 @@ import {VitalitySquaresSettings, VitalitySquareItem} from './vitalitySquaresSett
     selector: 'vitality-squares-game',
     templateUrl: 'templates/vitalitySquaresGame.html',
     directives: [CORE_DIRECTIVES]
-    //styleUrls: ['app/border-component.css'],
 })
 export class VitalitySquaresGameComponent {
 

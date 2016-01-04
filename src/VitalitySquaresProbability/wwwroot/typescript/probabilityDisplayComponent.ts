@@ -9,7 +9,6 @@ import {CollapsiblePanel} from './collapsiblePanel';
     selector: 'probability-display',
     templateUrl: 'templates/probabilityDisplay.html',
     directives: [CORE_DIRECTIVES, CollapsiblePanel]
-    //styleUrls: ['app/border-component.css'],
 })
 export class ProbabilityDisplayComponent {
 
