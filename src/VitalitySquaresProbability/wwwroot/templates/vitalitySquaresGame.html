@@ -9,7 +9,7 @@
 </p>
 <div class="gameBoard row {{remainingSelections < 1 ? 'disabled' : ''}}">
     <div class="vitalitySquare col-xs-3 {{vitalitySquare.color}}" *ngFor="#vitalitySquare of vitalitySquares">
-        <a href="#" (click)="selectVitalitySquare(vitalitySquare, $event)" class="{{vitalitySquare.squareType}}">
+        <a href="javascript:void(0)" (click)="selectVitalitySquare(vitalitySquare, $event)" class="{{vitalitySquare.squareType}}">
             <i class="{{vitalitySquare.icon}}"></i>
         </a>
     </div>
@@ -17,3 +17,5 @@
 <div class="buttons">
     <button type="button" class="btn btn-danger center-block" (click)="resetGameBoard()">Reset</button>
 </div>
+
+<popoverPicker [visible]="vitalitySquarePicker.show" [targetElement]="vitalitySquarePicker.targetElement"></popoverPicker>

@@ -36,6 +36,11 @@ function convertFlatIconEnumToClass(icon: string): string {
     return iconClass;
 }
 
+export enum VitalitySquareGameModes {
+    play = 1,
+    edit = 2
+}
+
 export enum Icons {
     flaticonApple55 = 1,
     flaticonFastFood = 2,
@@ -81,6 +86,7 @@ export class VitalitySquaresSettings{
     remainingSelections: number;
     totalSelections: number;
     gridItems: Array<VitalitySquareItem>;
+    vitalitySquareGameMode: VitalitySquareGameModes;
 }
 
 @Injectable()
@@ -109,7 +115,8 @@ export class VitalitySquaresSettingsService {
                     isRandomColor: true,
                     isRandomIcon: RandomIcons.junkFood
                 }
-            ]
+            ],
+            vitalitySquareGameMode: VitalitySquareGameModes.edit
         };
 
         this.eventEmitter = new EventEmitter(false);

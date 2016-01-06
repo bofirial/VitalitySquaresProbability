@@ -277,3 +277,123 @@ td {
         color: $red-800;
     }
 }
+
+.pickerItem {
+    padding: 0.5rem 1rem;
+
+    &.green {
+        a {
+            color: $green-800;
+            background-color: $green-200;
+            border-color: $green-800;
+
+            &:hover {
+                background-color: $green-300;
+            }
+        }
+    }
+
+    &.orange {
+        a {
+            color: $orange-800;
+            background-color: $orange-200;
+            border-color: $orange-800;
+
+            &:hover {
+                background-color: $orange-300;
+            }
+        }
+    }
+
+    &.yellow {
+        a {
+            color: $yellow-800;
+            background-color: $yellow-200;
+            border-color: $yellow-800;
+
+            &:hover {
+                background-color: $yellow-300;
+            }
+        }
+    }
+
+    &.blue {
+        a {
+            color: $blue-800;
+            background-color: $blue-200;
+            border-color: $blue-800;
+
+            &:hover {
+                background-color: $blue-300;
+            }
+        }
+    }
+
+    &.purple {
+        a {
+            color: $purple-800;
+            background-color: $purple-200;
+            border-color: $purple-800;
+
+            &:hover {
+                background-color: $purple-300;
+            }
+        }
+    }
+
+    &.red {
+        a {
+            color: $red-800;
+            background-color: $red-200;
+            border-color: $red-800;
+
+            &:hover {
+                background-color: $red-300;
+            }
+        }
+    }
+
+    a {
+        display: block;
+        width: 4rem;
+        text-align: center;
+        vertical-align: middle;
+        margin: auto;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: solid 0.2rem black;
+        color: $grey-500;
+        background-color: $grey-200;
+        border-color: $grey-500;
+
+        &:hover {
+            background-color: $grey-300;
+            text-decoration: none;
+        }
+
+        &:focus {
+            text-decoration: none;
+        }
+
+        i {
+            font-size: 2.5rem;
+            line-height: 1;
+
+            &:before {
+                font-size: 2.5rem;
+            }
+        }
+    }
+}
+
+.pickerBackdrop {
+    display: none;
+    background-color: black;
+    position: absolute;
+    z-index: 1000;
+    opacity: .5;
+
+    &.show {
+        display: block;
+    }
+}
