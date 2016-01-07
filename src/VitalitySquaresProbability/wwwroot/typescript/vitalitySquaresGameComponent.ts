@@ -2,19 +2,15 @@
 import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
-import {VitalitySquaresGameService, VitalitySquare} from './vitalitySquaresGameService';
-import {VitalitySquaresSettings, VitalitySquareItem, VitalitySquareGameModes} from './vitalitySquaresSettingsService';
-import {PopoverPicker} from './popoverPicker';
-
-export class VitalitySquarePicker {
-    show: boolean;
-    targetElement: any;
-}
+import {VitalitySquare, FlatIcons, VitalitySquareGameModes, VitalitySquareConfiguration} from './vitalitySquareCore';
+import {VitalitySquaresGameService} from './vitalitySquaresGameService';
+import {VitalitySquaresSettings} from './vitalitySquaresSettingsService';
+import {VitalitySquarePicker, VitalitySquareOption, VitalitySquarePickerSettings} from './vitalitySquarePicker';
 
 @Component({
     selector: 'vitality-squares-game',
     templateUrl: 'templates/vitalitySquaresGame.html',
-    directives: [CORE_DIRECTIVES, PopoverPicker]
+    directives: [CORE_DIRECTIVES, VitalitySquarePicker]
 })
 export class VitalitySquaresGameComponent {
 
@@ -30,23 +26,35 @@ export class VitalitySquaresGameComponent {
     private setVitalityGameSettings(vitalitySquaresSettings: VitalitySquaresSettings): void {
         
         this.remainingSelections = vitalitySquaresSettings.remainingSelections;
-        this.vitalitySquareConfigurations = vitalitySquaresSettings.gridItems;
+        this.vitalitySquareConfigurations = vitalitySquaresSettings.vitalitySquareConfigurations;
         this.vitalitySquareGameMode = vitalitySquaresSettings.vitalitySquareGameMode;
+
+        this.pickerSettings.vitalitySquareOptions = [{
+            color: '',
+            icon: FlatIcons.QuestionMark
+        }];
+
+        for (var vitalitySquareItem of vitalitySquaresSettings.vitalitySquareConfigurations)
+        {
+            this.pickerSettings.vitalitySquareOptions.push(vitalitySquareItem);
+        }
     }
 
     private vitalitySquaresGameService: VitalitySquaresGameService;
 
     remainingSelections: number;
     vitalitySquares: Array<VitalitySquare>;
-    vitalitySquareConfigurations: Array<VitalitySquareItem>;
+    vitalitySquareConfigurations: Array<VitalitySquareConfiguration>;
     vitalitySquareGameMode: VitalitySquareGameModes;
-    vitalitySquarePicker: VitalitySquarePicker = {
+    pickerSettings: VitalitySquarePickerSettings = {
         show: false,
-        targetElement: null
+        targetElement: null,
+        vitalitySquare: null,
+        vitalitySquareOptions: []
     };
 
     selectVitalitySquare(vitalitySquare: VitalitySquare, $event : Event): void {
-        if (this.vitalitySquareGameMode == VitalitySquareGameModes.play) {
+        if (this.vitalitySquareGameMode == VitalitySquareGameModes.Play) {
 
             if (this.remainingSelections > 0 && vitalitySquare.color == "") {
                 var newVitalitySquare = this.vitalitySquaresGameService.getRandomRemainingVitalitySquare();
@@ -55,11 +63,19 @@ export class VitalitySquaresGameComponent {
                 vitalitySquare.icon = newVitalitySquare.icon;
             }
         }
-        else if (this.vitalitySquareGameMode == VitalitySquareGameModes.edit) {
-            this.vitalitySquarePicker.show = !this.vitalitySquarePicker.show;
+        else if (this.vitalitySquareGameMode == VitalitySquareGameModes.Edit) {
+            this.pickerSettings.show = true;
 
-            this.vitalitySquarePicker.targetElement = $event.currentTarget;
+            this.pickerSettings.vitalitySquare = vitalitySquare;
+
+            this.pickerSettings.targetElement = $event.currentTarget;
         }
+    }
+
+    popupPickerSelect(vitalitySquare : VitalitySquare) {
+        this.pickerSettings.vitalitySquare.color = vitalitySquare.color;
+        this.pickerSettings.vitalitySquare.icon = vitalitySquare.icon;
+        this.pickerSettings.show = false;
     }
 
     resetGameBoard(): void {

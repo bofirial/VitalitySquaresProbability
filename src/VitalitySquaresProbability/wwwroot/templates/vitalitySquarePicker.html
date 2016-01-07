@@ -1,0 +1,14 @@
+﻿<div class="popover {{popoverPointerClass}}" role="tooltip" [style.visibility]="visibility" [style.top]="yPosition" [style.left]="xPosition">
+    <div class="popover-arrow"></div>
+    <h3 class="popover-title">Select A Vitality Square</h3>
+    <div class="popover-content">
+        <div class="row">
+            <div class="pickerItem col-xs-4 {{vitalitySquareOption.color}}" *ngFor="#vitalitySquareOption of vitalitySquareOptions">
+                <a href="javascript:void(0)" (click)="select.emit(vitalitySquareOption)">
+                    <i class="{{vitalitySquareOption.icon}}"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pickerBackdrop {{visible ? 'show' : ''}}" [style.left]="backdropLeft" [style.top]="backdropTop" [style.width]="backdropWidth" [style.height]="backdropHeight" (click)="close()"></div>

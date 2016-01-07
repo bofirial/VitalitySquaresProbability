@@ -1,11 +1,7 @@
 ﻿import {Injectable} from 'angular2/core';
 
-import {VitalitySquaresSettingsService, VitalitySquaresSettings, VitalitySquareItem} from './vitalitySquaresSettingsService';
-
-export class VitalitySquare {
-    color: string;
-    icon: string;
-}
+import {VitalitySquare, FlatIcons} from './vitalitySquareCore';
+import {VitalitySquaresSettingsService, VitalitySquaresSettings} from './vitalitySquaresSettingsService';
 
 @Injectable()
 export class VitalitySquaresGameService {
@@ -13,8 +9,6 @@ export class VitalitySquaresGameService {
     constructor(vitalitySquaresSettingsService: VitalitySquaresSettingsService) {
         this.vitalitySquaresSettingsService = vitalitySquaresSettingsService;
     }
-
-    private blankIcon: string = 'flaticon-question30';
 
     private vitalitySquaresSettingsService: VitalitySquaresSettingsService; 
 
@@ -30,7 +24,7 @@ export class VitalitySquaresGameService {
         for (var i = 0; i < totalVitalitySquares; i++) {
             vitalitySquares.push({
                 color: '',
-                icon: this.blankIcon
+                icon: FlatIcons.QuestionMark
             });
         }
 
@@ -48,7 +42,7 @@ export class VitalitySquaresGameService {
 
         var vitalitySquare: VitalitySquare;
 
-        for (let gridItem of settings.gridItems) {
+        for (let gridItem of settings.vitalitySquareConfigurations) {
             currentRemaining += gridItem.remaining;
 
             if (randomSquare < currentRemaining) {

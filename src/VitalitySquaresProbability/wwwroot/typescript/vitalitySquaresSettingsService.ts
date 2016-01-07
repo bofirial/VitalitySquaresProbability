@@ -2,90 +2,12 @@
 import {Injectable, EventEmitter} from 'angular2/core';
 
 import {copyObject} from './utilities';
-
-export enum RandomIcons {
-    notRandom = 1,
-    fruit = 2,
-    junkFood = 3
-}
-
-export enum Colors {
-    green = 1,
-    orange = 2,
-    yellow = 3,
-    purple = 4,
-    blue = 5,
-    red = 6
-}
-
-function convertFlatIconEnumToClass(icon: string): string {
-
-    var iconClass = "";
-
-    for (var i = 0; i < icon.length; i++) {
-        var c = icon[i];
-
-        if (c.toUpperCase() == c && isNaN(<any>c) == true) {
-            iconClass += '-' + c.toLowerCase();
-        }
-        else {
-            iconClass += c;
-        }
-    }
-
-    return iconClass;
-}
-
-export enum VitalitySquareGameModes {
-    play = 1,
-    edit = 2
-}
-
-export enum Icons {
-    flaticonApple55 = 1,
-    flaticonFastFood = 2,
-    flaticonFruit72 = 3,
-    flaticonHealthyFood4 = 4,
-    flaticonSweet9 = 5,
-    flaticonBaked2 = 6,
-    flaticonBread14 = 7,
-    flaticonBroccoli = 8,
-    flaticonCheese14 = 9,
-    flaticonDrink110 = 10,
-    flaticonDrink24 = 11,
-    flaticonFish52 = 12,
-    flaticonSandwich = 13,
-    flaticonSteak = 14,
-    flaticonTea24 = 15,
-    flaticonVegetables4 = 16
-}
-
-export enum FruitIcons {
-    flaticonApple55 = 1,
-    flaticonFruit72 = 2,
-    flaticonHealthyFood4 = 3
-}
-
-export enum JunkFoodIcons {
-    flaticonFastFood = 1,
-    flaticonSweet9 = 2,
-    flaticonBaked2 = 3
-}
-
-export class VitalitySquareItem {
-    total: number;
-    remaining: number;
-    color: string;
-    icon: string;
-    id: number;
-    isRandomColor: boolean;
-    isRandomIcon: RandomIcons;
-}
+import {RandomIconModes, VitalitySquareGameModes, Colors, Icons, FlatIcons, IconGroups, VitalitySquareConfiguration} from './vitalitySquareCore';
 
 export class VitalitySquaresSettings{
     remainingSelections: number;
     totalSelections: number;
-    gridItems: Array<VitalitySquareItem>;
+    vitalitySquareConfigurations: Array<VitalitySquareConfiguration>;
     vitalitySquareGameMode: VitalitySquareGameModes;
 }
 
@@ -96,27 +18,25 @@ export class VitalitySquaresSettingsService {
         this.vitalitySquaresSettings = {
             remainingSelections: 6,
             totalSelections: 6,
-            gridItems: [
+            vitalitySquareConfigurations: [
                 {
                     total: 6,
                     remaining: 6,
                     color: 'green',
-                    icon: 'flaticon-apple55',
-                    id: 1,
+                    icon: FlatIcons.Apple,
                     isRandomColor: true,
-                    isRandomIcon: RandomIcons.fruit
+                    isRandomIcon: RandomIconModes.Fruit
                 },
                 {
                     total: 6,
                     remaining: 6,
                     color: 'orange',
-                    icon: 'flaticon-fast-food',
-                    id: 2,
+                    icon: FlatIcons.FastFood,
                     isRandomColor: true,
-                    isRandomIcon: RandomIcons.junkFood
+                    isRandomIcon: RandomIconModes.JunkFood
                 }
             ],
-            vitalitySquareGameMode: VitalitySquareGameModes.edit
+            vitalitySquareGameMode: VitalitySquareGameModes.Edit
         };
 
         this.eventEmitter = new EventEmitter(false);
@@ -134,7 +54,7 @@ export class VitalitySquaresSettingsService {
     getTotalRemainingItems(): number {
         var totalRemaining = 0;
 
-        for (var item of this.vitalitySquaresSettings.gridItems) {
+        for (var item of this.vitalitySquaresSettings.vitalitySquareConfigurations) {
             totalRemaining += item.remaining;
         }
 
@@ -144,14 +64,14 @@ export class VitalitySquaresSettingsService {
     getTotalItems(): number {
         var total = 0;
 
-        for (var item of this.vitalitySquaresSettings.gridItems) {
+        for (var item of this.vitalitySquaresSettings.vitalitySquareConfigurations) {
             total += item.total;
         }
 
         return total;
     }
 
-    private getRandomColor(vitalitySquareItems: Array<VitalitySquareItem>): string {
+    private getRandomColor(vitalitySquareConfigurations: Array<VitalitySquareConfiguration>): string {
 
         var i: number = -1;
         var j: number = 1;
@@ -162,18 +82,18 @@ export class VitalitySquaresSettingsService {
 
             i = Math.ceil(Math.random() * 6);
             
-            for (var vitalitySquareItem of vitalitySquareItems) {
-                if (Colors[i] == vitalitySquareItem.color && j < 500) {
+            for (var vitalitySquareConfiguration of vitalitySquareConfigurations) {
+                if (Colors[i].toLowerCase() == vitalitySquareConfiguration.color && j < 500) {
                     i = -1;
                     break;
                 }
             }
         }
 
-        return Colors[i];
+        return Colors[i].toLowerCase();
     }
 
-    private getRandomIcon(isRandomIcon : RandomIcons, vitalitySquareItems: Array<VitalitySquareItem>): string {
+    private getRandomIcon(randomIconMode: RandomIconModes, vitalitySquareConfigurations: Array<VitalitySquareConfiguration>): string {
 
         var i: number = -1;
         var j: number = 1;
@@ -186,21 +106,21 @@ export class VitalitySquaresSettingsService {
 
             i = Math.ceil(Math.random() * 3);
 
-            icon = convertFlatIconEnumToClass(Icons[i]);
+            icon = FlatIcons[Icons[i]];
 
-            if (isRandomIcon == RandomIcons.fruit) {
+            if (randomIconMode == RandomIconModes.Fruit) {
 
-                icon = convertFlatIconEnumToClass(FruitIcons[i]);
+                icon = FlatIcons[Icons[IconGroups.FruitIcons[i-1]]];
             }
 
-            if (isRandomIcon == RandomIcons.junkFood) {
+            if (randomIconMode == RandomIconModes.JunkFood) {
 
-                icon = convertFlatIconEnumToClass(JunkFoodIcons[i]);
+                icon = FlatIcons[Icons[IconGroups.JunkFoodIcons[i-1]]];
             }
             
-            for (var vitalitySquareItem of vitalitySquareItems) {
+            for (var vitalitySquareConfiguration of vitalitySquareConfigurations) {
 
-                if (icon == vitalitySquareItem.icon && j < 500) {
+                if (icon == vitalitySquareConfiguration.icon && j < 500) {
                     i = -1;
                     break;
                 }
@@ -213,31 +133,31 @@ export class VitalitySquaresSettingsService {
     resetSettings(): void {
         var settings = this.getSettings();
 
-        for (let gridItem of settings.gridItems) {
-            gridItem.remaining = gridItem.total;
+        for (let vitalitySquareConfiguration of settings.vitalitySquareConfigurations) {
+            vitalitySquareConfiguration.remaining = vitalitySquareConfiguration.total;
         }
 
         settings.remainingSelections = settings.totalSelections;
 
-        for (var vitalitySquareItem of settings.gridItems) {
-            if (vitalitySquareItem.isRandomColor) {
+        for (var vitalitySquareConfiguration of settings.vitalitySquareConfigurations) {
+            if (vitalitySquareConfiguration.isRandomColor) {
 
-                vitalitySquareItem.color = "";
+                vitalitySquareConfiguration.color = "";
             }
-            if (vitalitySquareItem.isRandomIcon != RandomIcons.notRandom) {
-                vitalitySquareItem.icon = "";
+            if (vitalitySquareConfiguration.isRandomIcon != RandomIconModes.NotRandom) {
+                vitalitySquareConfiguration.icon = "";
             }
         }
 
-        for (var vitalitySquareItem of settings.gridItems) {
-            if (vitalitySquareItem.isRandomColor) {
+        for (var vitalitySquareConfiguration of settings.vitalitySquareConfigurations) {
+            if (vitalitySquareConfiguration.isRandomColor) {
 
-                vitalitySquareItem.color = this.getRandomColor(settings.gridItems);
+                vitalitySquareConfiguration.color = this.getRandomColor(settings.vitalitySquareConfigurations);
             }
 
-            if (vitalitySquareItem.isRandomColor) {
+            if (vitalitySquareConfiguration.isRandomColor) {
 
-                vitalitySquareItem.icon = this.getRandomIcon(vitalitySquareItem.isRandomIcon, settings.gridItems);
+                vitalitySquareConfiguration.icon = this.getRandomIcon(vitalitySquareConfiguration.isRandomIcon, settings.vitalitySquareConfigurations);
             }
         }
 

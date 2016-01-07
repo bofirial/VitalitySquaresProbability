@@ -1,7 +1,8 @@
 ﻿
 import {Injectable} from 'angular2/core';
 
-import {VitalitySquaresSettingsService, VitalitySquaresSettings, VitalitySquareItem} from './vitalitySquaresSettingsService';
+import {VitalitySquaresSettingsService, VitalitySquaresSettings} from './vitalitySquaresSettingsService';
+import {VitalitySquare, VitalitySquareConfiguration} from './vitalitySquareCore'
 import {ProbabilityCalculationService} from './probabilityCalculationService';
 
 export class Outcome {
@@ -10,10 +11,7 @@ export class Outcome {
     atLeastProbability: number;
 }
 
-export class ProbabilityDisplayStatistics {
-    color: string;
-    icon: string;
-    id: number;
+export class VitalitySquareStatistics extends VitalitySquare {
     probabilityOfNextSquare: number;
     outcomes: Array<Outcome>;
     showDetails: boolean;
@@ -30,12 +28,12 @@ export class ProbabilityDisplayService {
     private vitalitySquaresSettingsService: VitalitySquaresSettingsService;
     private probabilityCalculationService: ProbabilityCalculationService;
 
-    private getProbabilityOfNextSquare(vitalitySquareItem: VitalitySquareItem): number {
+    private getProbabilityOfNextSquare(vitalitySquareItem: VitalitySquareConfiguration): number {
         
         return vitalitySquareItem.remaining / this.vitalitySquaresSettingsService.getTotalRemainingItems();
     }
 
-    private getExactProbabilityOfOutcome(vitalitySquareItem: VitalitySquareItem, outcome: number, totalRemainingItems: number, remainingSelections: number): number {
+    private getExactProbabilityOfOutcome(vitalitySquareItem: VitalitySquareConfiguration, outcome: number, totalRemainingItems: number, remainingSelections: number): number {
         
         var requiredSelections = outcome - (vitalitySquareItem.total - vitalitySquareItem.remaining);
 
@@ -46,7 +44,7 @@ export class ProbabilityDisplayService {
         return this.probabilityCalculationService.hypergeometricProbability(totalRemainingItems, vitalitySquareItem.remaining, remainingSelections, requiredSelections);
     }
 
-    private getAtLeastProbabilityOfOutcome(vitalitySquareItem: VitalitySquareItem, outcome: number, totalRemainingItems: number, remainingSelections: number): number {
+    private getAtLeastProbabilityOfOutcome(vitalitySquareItem: VitalitySquareConfiguration, outcome: number, totalRemainingItems: number, remainingSelections: number): number {
 
         let total = 0;
 
@@ -57,15 +55,14 @@ export class ProbabilityDisplayService {
         return total;
     }
 
-    getProbabilityDisplayStatistics(): Array<ProbabilityDisplayStatistics> {
+    getProbabilityDisplayStatistics(): Array<VitalitySquareStatistics> {
 
-        var probabilityDisplayStatistics = new Array<ProbabilityDisplayStatistics>();
+        var probabilityDisplayStatistics = new Array<VitalitySquareStatistics>();
         var totalRemainingItems = this.vitalitySquaresSettingsService.getTotalRemainingItems();
         var vitalitySquaresSettings = this.vitalitySquaresSettingsService.getSettings();
 
-        for (let vitalitySquareItem of vitalitySquaresSettings.gridItems) {
-            var currentItemStatistics: ProbabilityDisplayStatistics  = {
-                id: vitalitySquareItem.id,
+        for (let vitalitySquareItem of vitalitySquaresSettings.vitalitySquareConfigurations) {
+            var currentItemStatistics: VitalitySquareStatistics  = {
                 color: vitalitySquareItem.color,
                 icon: vitalitySquareItem.icon,
                 probabilityOfNextSquare: this.getProbabilityOfNextSquare(vitalitySquareItem),
@@ -91,7 +88,7 @@ export class ProbabilityDisplayService {
         return probabilityDisplayStatistics;
     }
 
-    subscribeToUpdates(callback: (probabilityDisplayStatistics: Array<ProbabilityDisplayStatistics>) => void): void {
+    subscribeToUpdates(callback: (probabilityDisplayStatistics: Array<VitalitySquareStatistics>) => void): void {
         this.vitalitySquaresSettingsService.subscribeToUpdates((vitalitySquareSettings) => {
             callback(this.getProbabilityDisplayStatistics());
         });

@@ -1,40 +1,31 @@
-﻿import {Component, Input, OnChanges, SimpleChange, ElementRef} from 'angular2/core';
+﻿import {Component, Input, OnChanges, SimpleChange, ElementRef, EventEmitter, Output} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
+import {VitalitySquare} from './vitalitySquareCore';
+
+export class VitalitySquareOption extends VitalitySquare{
+
+}
+
+export class VitalitySquarePickerSettings {
+    show: boolean;
+    targetElement: any;
+    vitalitySquare: VitalitySquare;
+    vitalitySquareOptions: Array<VitalitySquareOption>;
+}
 
 @Component({
-    selector: 'popoverPicker',
-    template: `
-<div class="popover {{popoverPointerClass}}" role="tooltip" [style.visibility]="visibility" [style.top]="yPosition" [style.left]="xPosition">
-    <div class="popover-arrow"></div>
-    <h3 class="popover-title">Select A Vitality Square</h3>
-    <div class="popover-content">
-        <div class="row">
-            <div class="pickerItem col-xs-4">
-                <a href="#">
-                    <i class="flaticon-question30"></i>
-                </a>
-            </div>
-            <div class="pickerItem yellow col-xs-4">
-                <a href="#">
-                    <i class="flaticon-fruit72"></i>
-                </a>
-            </div>
-            <div class="pickerItem red col-xs-4">
-                <a href="#">
-                    <i class="flaticon-baked2"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="pickerBackdrop {{visible ? 'show' : ''}}" [style.left]="backdropLeft" [style.top]="backdropTop" [style.width]="backdropWidth" [style.height]="backdropHeight" (click)="hide()"></div>`,
+    selector: 'vitalitySquarePicker',
+    templateUrl: 'templates/vitalitySquarePicker.html',
     directives: [CORE_DIRECTIVES]
 })
-export class PopoverPicker implements OnChanges {
+export class VitalitySquarePicker implements OnChanges {
 
     @Input() title: string;
     @Input() visible: boolean;
     @Input() targetElement: any;
+    @Input() vitalitySquareOptions: Array<VitalitySquareOption>;
+    @Output() select = new EventEmitter();
+    @Output() cancel = new EventEmitter();
 
     private visibility: string;
     private xPosition: string;
@@ -51,6 +42,10 @@ export class PopoverPicker implements OnChanges {
         this.element = element;
     }
 
+    private close(): void {
+        this.cancel.emit(null);
+    }
+    
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {
 
         var target = this.targetElement,
@@ -93,5 +88,4 @@ export class PopoverPicker implements OnChanges {
         this.backdropWidth = window.innerWidth + "px";
         this.backdropHeight = window.innerHeight + "px";
     }
-
 }

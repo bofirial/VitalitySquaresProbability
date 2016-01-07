@@ -2,7 +2,7 @@
 import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
-import {ProbabilityDisplayService, ProbabilityDisplayStatistics} from './probabilityDisplayService';
+import {ProbabilityDisplayService, VitalitySquareStatistics} from './probabilityDisplayService';
 import {CollapsiblePanel} from './collapsiblePanel';
 
 @Component({
@@ -18,13 +18,13 @@ export class ProbabilityDisplayComponent {
         probabilityDisplayService.subscribeToUpdates(this.getProbabilityStatistics.bind(this));
     }
 
-    private copyCollapseStatuses(currentProbabilityStatistics: Array<ProbabilityDisplayStatistics>, newProbabilityStatistics: Array<ProbabilityDisplayStatistics>)
-        : Array<ProbabilityDisplayStatistics> {
+    private copyCollapseStatuses(currentProbabilityStatistics: Array<VitalitySquareStatistics>, newProbabilityStatistics: Array<VitalitySquareStatistics>)
+        : Array<VitalitySquareStatistics> {
 
         if (currentProbabilityStatistics != undefined && newProbabilityStatistics != undefined) {
             for (var probStat of currentProbabilityStatistics) {
                 for (var newProbStat of newProbabilityStatistics) {
-                    if (probStat.id == newProbStat.id) {
+                    if (probStat.color == newProbStat.color) {
                         newProbStat.showDetails = probStat.showDetails;
                     }
                 }
@@ -34,13 +34,13 @@ export class ProbabilityDisplayComponent {
         return newProbabilityStatistics;
     }
 
-    private getProbabilityStatistics(probabilityStatistics: Array<ProbabilityDisplayStatistics>): void {
+    private getProbabilityStatistics(probabilityStatistics: Array<VitalitySquareStatistics>): void {
 
         probabilityStatistics = this.copyCollapseStatuses(this.probabilityStatistics, probabilityStatistics);
 
         this.probabilityStatistics = probabilityStatistics;
     }
 
-    probabilityStatistics: Array<ProbabilityDisplayStatistics>;
+    probabilityStatistics: Array<VitalitySquareStatistics>;
    
 }
