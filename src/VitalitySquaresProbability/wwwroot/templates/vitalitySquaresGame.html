@@ -7,9 +7,9 @@
         </span>
     </span>
 </p>
-<div class="gameBoard row {{remainingSelections < 1 ? 'disabled' : ''}}">
-    <div class="vitalitySquare col-xs-3 {{vitalitySquare.color}}" *ngFor="#vitalitySquare of vitalitySquares">
-        <a href="javascript:void(0)" (click)="selectVitalitySquare(vitalitySquare, $event)" class="{{vitalitySquare.squareType}}">
+<div class="gameBoard row">
+    <div class="p-t-1 col-xs-3" *ngFor="#vitalitySquare of vitalitySquares">
+        <a href="javascript:void(0)" (click)="selectVitalitySquare(vitalitySquare, $event)" class="vitalitySquare {{vitalitySquare.color}} {{remainingSelections < 1 ? 'disabled' : ''}}">
             <i class="{{vitalitySquare.icon}}"></i>
         </a>
     </div>

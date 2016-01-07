@@ -15,6 +15,108 @@ vsp, vitality-squares-game, probability-display {
     display: block;
 }
 
+.green {
+    color: $green-800 !important;
+
+    &.vitalitySquare, &.btn, &.vitalitySquareOption {
+        background-color: $green-200;
+        border-color: $green-800;
+
+        &:hover {
+            background-color: $green-300;
+
+            &.disabled {
+                background-color: $green-200;
+            }
+        }
+    }
+}
+
+.orange {
+    color: $orange-800 !important;
+
+    &.vitalitySquare, &.btn, &.vitalitySquareOption {
+        background-color: $orange-200;
+        border-color: $orange-800;
+
+        &:hover {
+            background-color: $orange-300;
+
+            &.disabled {
+                background-color: $orange-200;
+            }
+        }
+    }
+}
+
+.yellow {
+    color: $yellow-800 !important;
+
+    &.vitalitySquare, &.btn, &.vitalitySquareOption {
+        background-color: $yellow-200;
+        border-color: $yellow-800;
+
+        &:hover {
+            background-color: $yellow-300;
+
+            &.disabled {
+                background-color: $yellow-200;
+            }
+        }
+    }
+}
+
+.blue {
+    color: $blue-800 !important;
+
+    &.vitalitySquare, &.btn, &.vitalitySquareOption {
+        background-color: $blue-200;
+        border-color: $blue-800;
+
+        &:hover {
+            background-color: $blue-300;
+
+            &.disabled {
+                background-color: $blue-200;
+            }
+        }
+    }
+}
+
+.purple {
+    color: $purple-800 !important;
+
+    &.vitalitySquare, &.btn, &.vitalitySquareOption {
+        background-color: $purple-200;
+        border-color: $purple-800;
+
+        &:hover {
+            background-color: $purple-300;
+
+            &.disabled {
+                background-color: $purple-200;
+            }
+        }
+    }
+}
+
+.red {
+    color: $red-800 !important;
+
+    &.vitalitySquare, &.btn, &.vitalitySquareOption {
+        background-color: $red-200;
+        border-color: $red-800;
+
+        &:hover {
+            background-color: $red-300;
+
+            &.disabled {
+                background-color: $red-200;
+            }
+        }
+    }
+}
+
 .gameStatistics {
     background-color: $grey-200;
     border-color: $grey-500;
@@ -22,158 +124,62 @@ vsp, vitality-squares-game, probability-display {
 
     .squareTotals span {
         padding: 0 0.3rem;
-
-        &.green {
-            color: $green-800;
-        }
-
-        &.orange {
-            color: $orange-800;
-        }
-
-        &.yellow {
-            color: $yellow-800;
-        }
-
-        &.blue {
-            color: $blue-800;
-        }
-
-        &.purple {
-            color: $purple-800;
-        }
-
-        &.red {
-            color: $red-800;
-        }
     }
 }
 
 .gameBoard {
     margin-bottom: 1rem;
+}
+
+.vitalitySquare, .vitalitySquareOption {
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    margin: auto;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: solid 0.2rem black;
+    color: $grey-500;
+    background-color: $grey-200;
+    border-color: $grey-500;
 
     &.disabled {
-        a {
-            cursor: default;
+        cursor: default;
+    }
 
-            &:hover {
-                background-color: $grey-200;
-            }
+    &:hover {
+        color: $grey-500;
+        background-color: $grey-300;
+        text-decoration: none;
+
+        &.disabled {
+            background-color: $grey-200;
         }
+    }
+
+    &:focus {
+        color: $grey-500;
+        text-decoration: none;
+    }
+
+    i {
+        line-height: 1;
     }
 }
 
 .vitalitySquare {
-    padding: 1rem 0;
+    width: 5rem;
 
-    &.green {
-        a {
-            color: $green-800;
-            background-color: $green-200;
-            border-color: $green-800;
-            cursor: default;
-
-            &:hover {
-                background-color: $green-200;
-            }
-        }
+    i:before {
+        font-size: 3rem;
     }
+}
 
-    &.orange {
-        a {
-            color: $orange-800;
-            background-color: $orange-200;
-            border-color: $orange-800;
-            cursor: default;
+.vitalitySquareOption {
+    width: 4rem;
 
-            &:hover {
-                background-color: $orange-200;
-            }
-        }
-    }
-
-    &.yellow {
-        a {
-            color: $yellow-800;
-            background-color: $yellow-200;
-            border-color: $yellow-800;
-            cursor: default;
-
-            &:hover {
-                background-color: $yellow-200;
-            }
-        }
-    }
-
-    &.blue {
-        a {
-            color: $blue-800;
-            background-color: $blue-200;
-            border-color: $blue-800;
-            cursor: default;
-
-            &:hover {
-                background-color: $blue-200;
-            }
-        }
-    }
-
-    &.purple {
-        a {
-            color: $purple-800;
-            background-color: $purple-200;
-            border-color: $purple-800;
-            cursor: default;
-
-            &:hover {
-                background-color: $purple-200;
-            }
-        }
-    }
-
-    &.red {
-        a {
-            color: $red-800;
-            background-color: $red-200;
-            border-color: $red-800;
-            cursor: default;
-
-            &:hover {
-                background-color: $red-200;
-            }
-        }
-    }
-
-    a {
-        display: block;
-        width: 5rem;
-        text-align: center;
-        vertical-align: middle;
-        margin: auto;
-        padding: 0.5rem;
-        border-radius: 0.5rem;
-        border: solid 0.2rem black;
-        color: $grey-500;
-        background-color: $grey-200;
-        border-color: $grey-500;
-
-        &:hover {
-            background-color: $grey-300;
-            text-decoration: none;
-        }
-
-        &:focus {
-            text-decoration: none;
-        }
-
-        i {
-            font-size: 3rem;
-            line-height: 1;
-
-            &:before {
-                font-size: 3rem;
-            }
-        }
+    i:before {
+        font-size: 2.5rem;
     }
 }
 
@@ -186,204 +192,8 @@ i[class^="flaticon-"]:before {
     margin-bottom: 1rem;
 }
 
-.itemStatistics {
-    a {
-        margin-bottom: 1rem;
-    }
-
-    &.green .btn {
-        color: $green-800;
-        background-color: $green-200;
-        border-color: $green-500;
-
-        &:hover {
-            background-color: $green-300;
-        }
-    }
-
-    &.orange .btn {
-        color: $orange-800;
-        background-color: $orange-200;
-        border-color: $orange-500;
-
-        &:hover {
-            background-color: $orange-300;
-        }
-    }
-
-    &.yellow .btn {
-        color: $yellow-800;
-        background-color: $yellow-200;
-        border-color: $yellow-500;
-
-        &:hover {
-            background-color: $yellow-300;
-        }
-    }
-
-    &.blue .btn {
-        color: $blue-800;
-        background-color: $blue-200;
-        border-color: $blue-500;
-
-        &:hover {
-            background-color: $blue-300;
-        }
-    }
-
-    &.purple .btn {
-        color: $purple-800;
-        background-color: $purple-200;
-        border-color: $purple-500;
-
-        &:hover {
-            background-color: $purple-300;
-        }
-    }
-
-    &.red .btn {
-        color: $red-800;
-        background-color: $red-200;
-        border-color: $red-500;
-
-        &:hover {
-            background-color: $red-300;
-        }
-    }
-}
-
-td {
-    &.green {
-        color: $green-800;
-    }
-
-    &.orange {
-        color: $orange-800;
-    }
-
-    &.yellow {
-        color: $yellow-800;
-    }
-
-    &.blue {
-        color: $blue-800;
-    }
-
-    &.purple {
-        color: $purple-800;
-    }
-
-    &.red {
-        color: $red-800;
-    }
-}
-
-.pickerItem {
+.popover-content .col-xs-4 {
     padding: 0.5rem 1rem;
-
-    &.green {
-        a {
-            color: $green-800;
-            background-color: $green-200;
-            border-color: $green-800;
-
-            &:hover {
-                background-color: $green-300;
-            }
-        }
-    }
-
-    &.orange {
-        a {
-            color: $orange-800;
-            background-color: $orange-200;
-            border-color: $orange-800;
-
-            &:hover {
-                background-color: $orange-300;
-            }
-        }
-    }
-
-    &.yellow {
-        a {
-            color: $yellow-800;
-            background-color: $yellow-200;
-            border-color: $yellow-800;
-
-            &:hover {
-                background-color: $yellow-300;
-            }
-        }
-    }
-
-    &.blue {
-        a {
-            color: $blue-800;
-            background-color: $blue-200;
-            border-color: $blue-800;
-
-            &:hover {
-                background-color: $blue-300;
-            }
-        }
-    }
-
-    &.purple {
-        a {
-            color: $purple-800;
-            background-color: $purple-200;
-            border-color: $purple-800;
-
-            &:hover {
-                background-color: $purple-300;
-            }
-        }
-    }
-
-    &.red {
-        a {
-            color: $red-800;
-            background-color: $red-200;
-            border-color: $red-800;
-
-            &:hover {
-                background-color: $red-300;
-            }
-        }
-    }
-
-    a {
-        display: block;
-        width: 4rem;
-        text-align: center;
-        vertical-align: middle;
-        margin: auto;
-        padding: 0.5rem;
-        border-radius: 0.5rem;
-        border: solid 0.2rem black;
-        color: $grey-500;
-        background-color: $grey-200;
-        border-color: $grey-500;
-
-        &:hover {
-            background-color: $grey-300;
-            text-decoration: none;
-        }
-
-        &:focus {
-            text-decoration: none;
-        }
-
-        i {
-            font-size: 2.5rem;
-            line-height: 1;
-
-            &:before {
-                font-size: 2.5rem;
-            }
-        }
-    }
 }
 
 .pickerBackdrop {
