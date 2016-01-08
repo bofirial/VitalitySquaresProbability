@@ -36,7 +36,7 @@ export class VitalitySquaresSettingsService {
                     isRandomIcon: RandomIconModes.JunkFood
                 }
             ],
-            vitalitySquareGameMode: VitalitySquareGameModes.Play
+            vitalitySquareGameMode: VitalitySquareGameModes.Edit
         };
 
         this.eventEmitter = new EventEmitter(false);

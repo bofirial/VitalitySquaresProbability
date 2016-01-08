@@ -3,7 +3,7 @@ import {CORE_DIRECTIVES} from 'angular2/common';
 import {VitalitySquare} from './vitalitySquareCore';
 
 export class VitalitySquareOption extends VitalitySquare{
-
+    disabled: boolean;
 }
 
 export class VitalitySquarePickerSettings {
@@ -45,7 +45,13 @@ export class VitalitySquarePicker implements OnChanges {
     private close(): void {
         this.cancel.emit(null);
     }
-    
+
+    private selectOption(vitalitySquareOption: VitalitySquareOption): void {
+        if (!vitalitySquareOption.disabled) {
+            this.select.emit(vitalitySquareOption);
+        }
+    }
+
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {
 
         var target = this.targetElement,

@@ -145,6 +145,8 @@ vsp, vitality-squares-game, probability-display {
 
     &.disabled {
         cursor: default;
+
+        opacity: 0.5;
     }
 
     &:hover {

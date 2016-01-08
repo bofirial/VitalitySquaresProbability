@@ -10,7 +10,7 @@ export class VitalitySquaresGameService {
         this.vitalitySquaresSettingsService = vitalitySquaresSettingsService;
     }
 
-    private vitalitySquaresSettingsService: VitalitySquaresSettingsService; 
+    private vitalitySquaresSettingsService: VitalitySquaresSettingsService;
 
     getVitalitySquaresSettings(): VitalitySquaresSettings {
         return this.vitalitySquaresSettingsService.getSettings();
@@ -42,27 +42,48 @@ export class VitalitySquaresGameService {
 
         var vitalitySquare: VitalitySquare;
 
-        for (let gridItem of settings.vitalitySquareConfigurations) {
-            currentRemaining += gridItem.remaining;
+        for (let vitalitySquareConfiguration of settings.vitalitySquareConfigurations) {
+            currentRemaining += vitalitySquareConfiguration.remaining;
 
             if (randomSquare < currentRemaining) {
 
                 vitalitySquare = {
-                    color: gridItem.color,
-                    icon: gridItem.icon
+                    color: vitalitySquareConfiguration.color,
+                    icon: vitalitySquareConfiguration.icon
                 };
 
-                gridItem.remaining--;
+                vitalitySquareConfiguration.remaining--;
 
                 break;
             }
         }
 
         settings.remainingSelections--;
-        
+
         this.vitalitySquaresSettingsService.saveSettings(settings);
 
         return vitalitySquare;
+    }
+
+    selectVitalitySquare(newVitalitySquare: VitalitySquare, previousVitalitySquare: VitalitySquare): void {
+        var settings = this.vitalitySquaresSettingsService.getSettings();
+        
+        for (let vitalitySquareConfiguration of settings.vitalitySquareConfigurations) {
+
+            if (vitalitySquareConfiguration.color == previousVitalitySquare.color) {
+                vitalitySquareConfiguration.remaining++;
+
+                settings.remainingSelections++;
+            }
+
+            if (vitalitySquareConfiguration.color == newVitalitySquare.color) {
+                vitalitySquareConfiguration.remaining--;
+
+                settings.remainingSelections--;
+            }
+        }
+
+        this.vitalitySquaresSettingsService.saveSettings(settings);
     }
 
     resetGameBoard(): void {

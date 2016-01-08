@@ -4,7 +4,7 @@
     <div class="popover-content">
         <div class="row">
             <div class="col-xs-4" *ngFor="#vitalitySquareOption of vitalitySquareOptions">
-                <a class="vitalitySquareOption {{vitalitySquareOption.color}}" href="javascript:void(0)" (click)="select.emit(vitalitySquareOption)">
+                <a class="vitalitySquareOption {{vitalitySquareOption.color}} {{vitalitySquareOption.disabled ? 'disabled' : ''}}" href="javascript:void(0)" (click)="selectOption(vitalitySquareOption)">
                     <i class="{{vitalitySquareOption.icon}}"></i>
                 </a>
             </div>
