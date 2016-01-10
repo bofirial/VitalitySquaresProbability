@@ -1,11 +1,7 @@
 ﻿import {Injectable} from 'angular2/core';
 
-import {VitalitySquaresSettingsService, VitalitySquaresSettings, VitalitySquareItem} from './vitalitySquaresSettingsService';
-
-export class VitalitySquare {
-    color: string;
-    icon: string;
-}
+import {VitalitySquare, FlatIcons} from './vitalitySquareCore';
+import {VitalitySquaresSettingsService, VitalitySquaresSettings} from './vitalitySquaresSettingsService';
 
 @Injectable()
 export class VitalitySquaresGameService {
@@ -14,9 +10,7 @@ export class VitalitySquaresGameService {
         this.vitalitySquaresSettingsService = vitalitySquaresSettingsService;
     }
 
-    private blankIcon: string = 'flaticon-question30';
-
-    private vitalitySquaresSettingsService: VitalitySquaresSettingsService; 
+    private vitalitySquaresSettingsService: VitalitySquaresSettingsService;
 
     getVitalitySquaresSettings(): VitalitySquaresSettings {
         return this.vitalitySquaresSettingsService.getSettings();
@@ -30,7 +24,7 @@ export class VitalitySquaresGameService {
         for (var i = 0; i < totalVitalitySquares; i++) {
             vitalitySquares.push({
                 color: '',
-                icon: this.blankIcon
+                icon: FlatIcons.QuestionMark
             });
         }
 
@@ -48,27 +42,48 @@ export class VitalitySquaresGameService {
 
         var vitalitySquare: VitalitySquare;
 
-        for (let gridItem of settings.gridItems) {
-            currentRemaining += gridItem.remaining;
+        for (let vitalitySquareConfiguration of settings.vitalitySquareConfigurations) {
+            currentRemaining += vitalitySquareConfiguration.remaining;
 
             if (randomSquare < currentRemaining) {
 
                 vitalitySquare = {
-                    color: gridItem.color,
-                    icon: gridItem.icon
+                    color: vitalitySquareConfiguration.color,
+                    icon: vitalitySquareConfiguration.icon
                 };
 
-                gridItem.remaining--;
+                vitalitySquareConfiguration.remaining--;
 
                 break;
             }
         }
 
         settings.remainingSelections--;
-        
+
         this.vitalitySquaresSettingsService.saveSettings(settings);
 
         return vitalitySquare;
+    }
+
+    selectVitalitySquare(newVitalitySquare: VitalitySquare, previousVitalitySquare: VitalitySquare): void {
+        var settings = this.vitalitySquaresSettingsService.getSettings();
+        
+        for (let vitalitySquareConfiguration of settings.vitalitySquareConfigurations) {
+
+            if (vitalitySquareConfiguration.color == previousVitalitySquare.color) {
+                vitalitySquareConfiguration.remaining++;
+
+                settings.remainingSelections++;
+            }
+
+            if (vitalitySquareConfiguration.color == newVitalitySquare.color) {
+                vitalitySquareConfiguration.remaining--;
+
+                settings.remainingSelections--;
+            }
+        }
+
+        this.vitalitySquaresSettingsService.saveSettings(settings);
     }
 
     resetGameBoard(): void {

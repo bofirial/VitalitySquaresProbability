@@ -63,4 +63,6 @@ gulp.task("lib", function() {
         .pipe(gulp.dest("./wwwroot/js/lib/tether"));
     gulp.src("./node_modules/tether/dist/css/**/*")
         .pipe(gulp.dest("./wwwroot/css/lib/tether"));
+    gulp.src("./Assets/flaticon/**/*")
+        .pipe(gulp.dest("./wwwroot/css/lib/flaticon"));
 });

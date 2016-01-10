@@ -1,0 +1,20 @@
+﻿<div class="popover {{popoverPointerClass}}" role="tooltip" [style.visibility]="visibility" [style.top]="yPosition" [style.left]="xPosition">
+    <div class="popover-arrow"></div>
+    <h3 class="popover-title">Select A Vitality Square</h3>
+    <div class="popover-content">
+        <div class="row">
+            <div class="col-xs-4" *ngFor="#vitalitySquareOption of currentPageOptions">
+                <a class="vitalitySquareOption {{vitalitySquareOption.color}} {{vitalitySquareOption.disabled ? 'disabled' : ''}}" href="javascript:void(0)" (click)="selectOption(vitalitySquareOption)">
+                    <i class="{{vitalitySquareOption.icon}}"></i>
+                </a>
+            </div>
+        </div>
+        <nav>
+            <ul class="pager">
+                <li class="pager-prev {{currentPage <= 1 && 'disabled'}}"><a href="javascript:void(0);" (click)="previousPage()"><i class="flaticon-left-arrow16"></i></a></li>
+                <li class="pager-next {{currentPage >= lastPage && 'disabled'}}"><a href="javascript:void(0);" (click)="nextPage()"><i class="flaticon-right-arrow26"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<backdrop [visible]="visible" [zIndex]="1000" (click)="close()"></backdrop>
