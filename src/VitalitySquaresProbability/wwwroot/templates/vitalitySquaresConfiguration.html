@@ -53,7 +53,7 @@
                     </div>
                     <div class="form-group {{ ngForm?.controls && (ngForm?.controls['colorTotal' + vitalitySquareConfiguration.id]?.valid === false) ? 'has-danger' : ''}}">
                         <label class="form-control-label">Number of <i class="{{vitalitySquareConfiguration.isRandomIcon ? 'flaticon-question30' : vitalitySquareConfiguration.icon}} {{vitalitySquareConfiguration.isRandomColor ? '' : vitalitySquareConfiguration.color}}"></i></label>
-                        <input type="number" class="form-control" [(ngModel)]="vitalitySquareConfiguration.total" ngControl="colorTotal{{vitalitySquareConfiguration.id}}" (keyup)="calculateTotals()" color-total [totalVitalitySquares]="totalVitalitySquares"/>
+                        <input type="number" class="form-control" [(ngModel)]="vitalitySquareConfiguration.total" ngControl="colorTotal{{vitalitySquareConfiguration.id}}" (input)="colorTotalChange()" color-total [totalVitalitySquares]="totalVitalitySquares"/>
                         <p class="text-help" [hidden]="ngForm?.controls == null ? true : !ngForm?.controls['colorTotal' + vitalitySquareConfiguration.id]?.errors?.greaterThanMax">The Total Number of Vitality Squares can not be greater than 24.</p>
                         <p class="text-help" [hidden]="ngForm?.controls == null ? true : !ngForm?.controls['colorTotal' + vitalitySquareConfiguration.id]?.errors?.notInteger">Number of Vitality Squares must be an integer.</p>
                         <p class="text-help" [hidden]="ngForm?.controls == null ? true : !ngForm?.controls['colorTotal' + vitalitySquareConfiguration.id]?.errors?.lessThanZero">Number of Vitality Squares must be greater than zero.</p>

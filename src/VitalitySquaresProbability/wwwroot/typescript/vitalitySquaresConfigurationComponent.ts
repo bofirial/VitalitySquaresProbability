@@ -82,6 +82,10 @@ export class VitalitySquaresConfigurationComponent implements OnChanges {
         this.calculateTotals();
     }
 
+    private colorTotalChange(): void {
+        setTimeout(this.calculateTotals.bind(this), 100);
+    }
+
     private calculateTotals(): void {
         this.totalVitalitySquares = 0;
 
