@@ -24,7 +24,7 @@ export class ProbabilityDisplayComponent {
         if (currentProbabilityStatistics != undefined && newProbabilityStatistics != undefined) {
             for (var probStat of currentProbabilityStatistics) {
                 for (var newProbStat of newProbabilityStatistics) {
-                    if (probStat.color == newProbStat.color) {
+                    if (probStat.id == newProbStat.id) {
                         newProbStat.showDetails = probStat.showDetails;
                     }
                 }

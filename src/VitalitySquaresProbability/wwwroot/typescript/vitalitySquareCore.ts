@@ -8,13 +8,8 @@ export class VitalitySquareConfiguration extends VitalitySquare {
     total: number;
     remaining: number;
     isRandomColor: boolean;
-    isRandomIcon: RandomIconModes;
-}
-
-export enum RandomIconModes {
-    NotRandom = 1,
-    Fruit = 2,
-    JunkFood = 3
+    isRandomIcon: boolean;
+    id: number;
 }
 
 export enum VitalitySquareGameModes {
@@ -23,12 +18,12 @@ export enum VitalitySquareGameModes {
 }
 
 export enum Colors {
-    Green = 1,
+    Green = 4,
     Orange = 2,
     Yellow = 3,
-    Purple = 4,
+    Purple = 6,
     Blue = 5,
-    Red = 6
+    Red = 1
 }
 
 export enum Icons {
@@ -49,7 +44,11 @@ export enum Icons {
     Tea = 15,
     Carrot = 16,
     Gear = 17,
-    QuestionMark = 18
+    QuestionMark = 18,
+    Add = 19,
+    Close = 20,
+    LeftArrow = 21,
+    RightArrow = 22
 }
 
 export class FlatIcons {
@@ -71,11 +70,14 @@ export class FlatIcons {
     static Carrot: string = "flaticon-vegetables4";
     static Gear: string = "flaticon-gear39";
     static QuestionMark: string = "flaticon-question30";
+    static Add: string = "flaticon-add182";
+    static Close: string = "flaticon-delete30";
+    static LeftArrow: string = "flaticon-left-arrow16";
+    static RightArrow: string = "flaticon-right-arrow26";
 }
 
 export class IconGroups {
-    static FruitIcons: Array<Icons> = [Icons.Apple, Icons.Banana, Icons.Grape];
-    static JunkFoodIcons: Array<Icons> = [Icons.FastFood, Icons.Cake, Icons.Cupcake];
-    static DrinkIcons: Array<Icons> = [Icons.Wine, Icons.Beer, Icons.Tea];
-    static VegetableIcons: Array<Icons> = [Icons.Broccoli, Icons.Carrot];
+    static PlayableIcons: Array<Icons> = [Icons.Apple, Icons.Banana, Icons.Grape, Icons.FastFood, Icons.Cake,
+        Icons.Cupcake, Icons.Wine, Icons.Beer, Icons.Tea, Icons.Broccoli, Icons.Carrot,
+        Icons.Bread, Icons.Cheese, Icons.Fish, Icons.Sandwich, Icons.Steak];
 }

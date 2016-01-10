@@ -14,57 +14,69 @@
         font-size: 20px;
 font-style: normal;
 margin-left: 20px;
-}.flaticon-apple55:before {
+}.flaticon-add182:before {
 	content: "\e000";
 }
-.flaticon-baked2:before {
+.flaticon-apple55:before {
 	content: "\e001";
 }
-.flaticon-bread14:before {
+.flaticon-baked2:before {
 	content: "\e002";
 }
-.flaticon-broccoli:before {
+.flaticon-bread14:before {
 	content: "\e003";
 }
-.flaticon-cheese14:before {
+.flaticon-broccoli:before {
 	content: "\e004";
 }
-.flaticon-drink110:before {
+.flaticon-cheese14:before {
 	content: "\e005";
 }
-.flaticon-drink24:before {
+.flaticon-delete30:before {
 	content: "\e006";
 }
-.flaticon-fast-food:before {
+.flaticon-drink110:before {
 	content: "\e007";
 }
-.flaticon-fish52:before {
+.flaticon-drink24:before {
 	content: "\e008";
 }
-.flaticon-fruit72:before {
+.flaticon-fast-food:before {
 	content: "\e009";
 }
-.flaticon-gear39:before {
+.flaticon-fish52:before {
 	content: "\e00a";
 }
-.flaticon-healthy-food4:before {
+.flaticon-fruit72:before {
 	content: "\e00b";
 }
-.flaticon-question30:before {
+.flaticon-gear39:before {
 	content: "\e00c";
 }
-.flaticon-sandwich:before {
+.flaticon-healthy-food4:before {
 	content: "\e00d";
 }
-.flaticon-steak:before {
+.flaticon-left-arrow16:before {
 	content: "\e00e";
 }
-.flaticon-sweet9:before {
+.flaticon-question30:before {
 	content: "\e00f";
 }
-.flaticon-tea24:before {
+.flaticon-right-arrow26:before {
 	content: "\e010";
 }
-.flaticon-vegetables4:before {
+.flaticon-sandwich:before {
 	content: "\e011";
+}
+.flaticon-steak:before {
+	content: "\e012";
+}
+.flaticon-sweet9:before {
+	content: "\e013";
+}
+.flaticon-tea24:before {
+	content: "\e014";
+}
+.flaticon-vegetables4:before {
+	content: "\e015";
 }

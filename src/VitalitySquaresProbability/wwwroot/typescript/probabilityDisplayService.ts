@@ -15,6 +15,7 @@ export class VitalitySquareStatistics extends VitalitySquare {
     probabilityOfNextSquare: number;
     outcomes: Array<Outcome>;
     showDetails: boolean;
+    id: number;
 }
 
 @Injectable()
@@ -61,24 +62,25 @@ export class ProbabilityDisplayService {
         var totalRemainingItems = this.vitalitySquaresSettingsService.getTotalRemainingItems();
         var vitalitySquaresSettings = this.vitalitySquaresSettingsService.getSettings();
 
-        for (let vitalitySquareItem of vitalitySquaresSettings.vitalitySquareConfigurations) {
+        for (let vitalitySquareConfiguration of vitalitySquaresSettings.vitalitySquareConfigurations) {
             var currentItemStatistics: VitalitySquareStatistics  = {
-                color: vitalitySquareItem.color,
-                icon: vitalitySquareItem.icon,
-                probabilityOfNextSquare: this.getProbabilityOfNextSquare(vitalitySquareItem),
+                color: vitalitySquareConfiguration.color,
+                icon: vitalitySquareConfiguration.icon,
+                probabilityOfNextSquare: this.getProbabilityOfNextSquare(vitalitySquareConfiguration),
                 outcomes: [],
-                showDetails: false
+                showDetails: false,
+                id: vitalitySquareConfiguration.id
             };
 
             if (vitalitySquaresSettings.remainingSelections <= 0) {
                 currentItemStatistics.probabilityOfNextSquare = 0;
             }
 
-            for (let i = 0; i < vitalitySquareItem.total + 1; i++) {
+            for (let i = 0; i < vitalitySquareConfiguration.total + 1; i++) {
                 currentItemStatistics.outcomes.push({
                     numSquares: i,
-                    exactProbability: this.getExactProbabilityOfOutcome(vitalitySquareItem, i, totalRemainingItems, vitalitySquaresSettings.remainingSelections),
-                    atLeastProbability: this.getAtLeastProbabilityOfOutcome(vitalitySquareItem, i, totalRemainingItems, vitalitySquaresSettings.remainingSelections)
+                    exactProbability: this.getExactProbabilityOfOutcome(vitalitySquareConfiguration, i, totalRemainingItems, vitalitySquaresSettings.remainingSelections),
+                    atLeastProbability: this.getAtLeastProbabilityOfOutcome(vitalitySquareConfiguration, i, totalRemainingItems, vitalitySquaresSettings.remainingSelections)
                 });
             }
 

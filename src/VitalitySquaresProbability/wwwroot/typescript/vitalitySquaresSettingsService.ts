@@ -2,7 +2,7 @@
 import {Injectable, EventEmitter} from 'angular2/core';
 
 import {copyObject} from './utilities';
-import {RandomIconModes, VitalitySquareGameModes, Colors, Icons, FlatIcons, IconGroups, VitalitySquareConfiguration} from './vitalitySquareCore';
+import {VitalitySquareGameModes, Colors, Icons, FlatIcons, IconGroups, VitalitySquareConfiguration} from './vitalitySquareCore';
 
 export class VitalitySquaresSettings{
     remainingSelections: number;
@@ -25,7 +25,8 @@ export class VitalitySquaresSettingsService {
                     color: 'green',
                     icon: FlatIcons.Apple,
                     isRandomColor: true,
-                    isRandomIcon: RandomIconModes.Fruit
+                    isRandomIcon: false,
+                    id: 1
                 },
                 {
                     total: 6,
@@ -33,10 +34,11 @@ export class VitalitySquaresSettingsService {
                     color: 'orange',
                     icon: FlatIcons.FastFood,
                     isRandomColor: true,
-                    isRandomIcon: RandomIconModes.JunkFood
+                    isRandomIcon: false,
+                    id: 2
                 }
             ],
-            vitalitySquareGameMode: VitalitySquareGameModes.Edit
+            vitalitySquareGameMode: VitalitySquareGameModes.Play
         };
 
         this.eventEmitter = new EventEmitter(false);
@@ -71,7 +73,7 @@ export class VitalitySquaresSettingsService {
         return total;
     }
 
-    private getRandomColor(vitalitySquareConfigurations: Array<VitalitySquareConfiguration>): string {
+    getRandomColor(vitalitySquareConfigurations: Array<VitalitySquareConfiguration>): string {
 
         var i: number = -1;
         var j: number = 1;
@@ -93,7 +95,7 @@ export class VitalitySquaresSettingsService {
         return Colors[i].toLowerCase();
     }
 
-    private getRandomIcon(randomIconMode: RandomIconModes, vitalitySquareConfigurations: Array<VitalitySquareConfiguration>): string {
+    getRandomIcon(vitalitySquareConfigurations: Array<VitalitySquareConfiguration>): string {
 
         var i: number = -1;
         var j: number = 1;
@@ -104,19 +106,9 @@ export class VitalitySquaresSettingsService {
 
             j++;
 
-            i = Math.ceil(Math.random() * 3);
+            i = Math.ceil(Math.random() * 16);
 
-            icon = FlatIcons[Icons[i]];
-
-            if (randomIconMode == RandomIconModes.Fruit) {
-
-                icon = FlatIcons[Icons[IconGroups.FruitIcons[i-1]]];
-            }
-
-            if (randomIconMode == RandomIconModes.JunkFood) {
-
-                icon = FlatIcons[Icons[IconGroups.JunkFoodIcons[i-1]]];
-            }
+            icon = FlatIcons[Icons[IconGroups.PlayableIcons[i - 1]]];
             
             for (var vitalitySquareConfiguration of vitalitySquareConfigurations) {
 
@@ -144,7 +136,7 @@ export class VitalitySquaresSettingsService {
 
                 vitalitySquareConfiguration.color = "";
             }
-            if (vitalitySquareConfiguration.isRandomIcon != RandomIconModes.NotRandom) {
+            if (vitalitySquareConfiguration.isRandomIcon) {
                 vitalitySquareConfiguration.icon = "";
             }
         }
@@ -155,9 +147,9 @@ export class VitalitySquaresSettingsService {
                 vitalitySquareConfiguration.color = this.getRandomColor(settings.vitalitySquareConfigurations);
             }
 
-            if (vitalitySquareConfiguration.isRandomColor) {
+            if (vitalitySquareConfiguration.isRandomIcon) {
 
-                vitalitySquareConfiguration.icon = this.getRandomIcon(vitalitySquareConfiguration.isRandomIcon, settings.vitalitySquareConfigurations);
+                vitalitySquareConfiguration.icon = this.getRandomIcon(settings.vitalitySquareConfigurations);
             }
         }
 
