@@ -1,5 +1,5 @@
 ﻿
-import {Injectable} from 'angular2/core';
+import { Injectable } from '@angular/core';
 
 import {VitalitySquaresSettingsService, VitalitySquaresSettings} from './vitalitySquaresSettingsService';
 import {VitalitySquare, VitalitySquareConfiguration} from './vitalitySquareCore'

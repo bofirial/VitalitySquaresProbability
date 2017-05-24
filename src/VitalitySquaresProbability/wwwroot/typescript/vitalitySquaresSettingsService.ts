@@ -1,5 +1,5 @@
 ﻿
-import {Injectable, EventEmitter} from 'angular2/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 import {copyObject} from './utilities';
 import {VitalitySquareGameModes, Colors, Icons, FlatIcons, IconGroups, VitalitySquareConfiguration} from './vitalitySquareCore';
@@ -16,12 +16,12 @@ export class VitalitySquaresSettingsService {
 
     constructor() {
         this.vitalitySquaresSettings = {
-            remainingSelections: 6,
-            totalSelections: 6,
+            remainingSelections: 8,
+            totalSelections: 8,
             vitalitySquareConfigurations: [
                 {
-                    total: 6,
-                    remaining: 6,
+                    total: 8,
+                    remaining: 8,
                     color: 'green',
                     icon: FlatIcons.Apple,
                     isRandomColor: true,
@@ -29,8 +29,8 @@ export class VitalitySquaresSettingsService {
                     id: 1
                 },
                 {
-                    total: 6,
-                    remaining: 6,
+                    total: 7,
+                    remaining: 7,
                     color: 'orange',
                     icon: FlatIcons.FastFood,
                     isRandomColor: true,

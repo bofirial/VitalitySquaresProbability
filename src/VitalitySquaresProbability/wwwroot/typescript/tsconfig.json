@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "noImplicitAny": false,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
@@ -9,7 +10,9 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "declaration": true,
-    "module": "commonjs"
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": [ "es2015", "dom" ]
   },
   "exclude": [
     "node_modules",

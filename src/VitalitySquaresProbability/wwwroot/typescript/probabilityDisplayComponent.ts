@@ -1,6 +1,6 @@
 ﻿
-import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
+import { Component } from '@angular/core';
+//import {CORE_DIRECTIVES} from '@angular/common';
 
 import {ProbabilityDisplayService, VitalitySquareStatistics} from './probabilityDisplayService';
 import {CollapsiblePanel} from './collapsiblePanel';
@@ -8,7 +8,7 @@ import {CollapsiblePanel} from './collapsiblePanel';
 @Component({
     selector: 'probability-display',
     templateUrl: 'templates/probabilityDisplay.html',
-    directives: [CORE_DIRECTIVES, CollapsiblePanel]
+    //directives: [CORE_DIRECTIVES, CollapsiblePanel]
 })
 export class ProbabilityDisplayComponent {
 

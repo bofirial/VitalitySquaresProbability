@@ -5,6 +5,7 @@
 
 body {
     padding: 2rem 0;
+    overflow-y: scroll;
 }
 
 .navbar h1 {
@@ -248,4 +249,16 @@ i[class^="flaticon-"]:before {
 
 .clear {
     clear: both;
+}
+
+.btn-danger:focus {
+    color: #fff;
+}
+
+vitalitysquarepicker .pagination {
+    font-size: 0.5rem;
+
+    [class^="flaticon-"]:before, [class*=" flaticon-"]:before, [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
+        font-size: 0.5rem
+    }
 }

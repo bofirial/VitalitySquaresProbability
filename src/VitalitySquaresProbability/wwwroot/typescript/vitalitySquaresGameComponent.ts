@@ -1,6 +1,6 @@
 ﻿
-import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
+import { Component } from '@angular/core';
+//import {CORE_DIRECTIVES} from '@angular/common';
 
 import {VitalitySquare, FlatIcons, VitalitySquareGameModes, VitalitySquareConfiguration} from './vitalitySquareCore';
 import {VitalitySquaresGameService} from './vitalitySquaresGameService';
@@ -10,7 +10,7 @@ import {VitalitySquarePicker, VitalitySquareOption, VitalitySquarePickerSettings
 @Component({
     selector: 'vitality-squares-game',
     templateUrl: 'templates/vitalitySquaresGame.html',
-    directives: [CORE_DIRECTIVES, VitalitySquarePicker]
+    //directives: [VitalitySquarePicker]
 })
 export class VitalitySquaresGameComponent {
 

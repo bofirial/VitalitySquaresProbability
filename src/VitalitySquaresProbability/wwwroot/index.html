@@ -11,19 +11,16 @@
     <link href="css/lib/flaticon/flaticon.css" rel="stylesheet" />
     <link href="css/site.css" rel="stylesheet" />
     <title>Vitality Squares Probability</title>
+    
+    <script src="js/lib/core-js/shim.min.js"></script>
+    <script src="js/lib/zone/zone.js"></script>
+    <script src="js/lib/system/system.js"></script>
+    <script src="js/systemjs.config.js"></script>
+    <script>
+        System.import('./js/bootstrap').catch(function (err) { console.error(err); });
+    </script>
 </head>
 <body>
     <vsp class="container">Loading...</vsp>
-    
-    <script src="js/lib/angular2/angular2-polyfills.js"></script>
-    <script src="js/lib/system/system.js"></script>
-    <script src="js/lib/rxjs/Rx.js"></script>
-    <script src="js/lib/angular2/angular2.dev.js"></script>
-    <script>
-        System.config({
-            packages: { 'js': { defaultExtension: 'js' } }
-        });
-        System.import('./js/bootstrap');
-    </script>
 </body>
 </html>

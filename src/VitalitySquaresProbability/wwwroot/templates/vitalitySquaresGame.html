@@ -1,21 +1,21 @@
 ﻿
 <p class="gameStatistics alert clearfix">
     <span class="remainingSelections font-weight-bold">{{remainingSelections}} Selections Remaining</span>
-    <span class="squareTotals pull-xs-right">
-        <span *ngFor="#vitalitySquareConfiguration of vitalitySquareConfigurations" class="{{vitalitySquareConfiguration.color}}">
+    <span class="squareTotals float-right">
+        <span *ngFor="let vitalitySquareConfiguration of vitalitySquareConfigurations" class="{{vitalitySquareConfiguration.color}}">
             {{vitalitySquareConfiguration.total - vitalitySquareConfiguration.remaining}} <i class="{{vitalitySquareConfiguration.icon}}"></i>
         </span>
     </span>
 </p>
 <div class="gameBoard row">
-    <div class="p-t-1 col-xs-3" *ngFor="#vitalitySquare of vitalitySquares">
+    <div class="pt-3 col-2" *ngFor="let vitalitySquare of vitalitySquares; let i = index;" [ngClass]="{'offset-1': i % 5 == 0 }">
         <a href="javascript:void(0)" (click)="selectVitalitySquare(vitalitySquare, $event)" class="vitalitySquare {{vitalitySquare.color}} {{isDisabled(vitalitySquare) ? 'disabled' : ''}}">
             <i class="{{vitalitySquare.icon}}"></i>
         </a>
     </div>
 </div>
 <div class="buttons">
-    <a href="javascript:void(0)" class="btn btn-danger btn-lg center-block" (click)="resetGameBoard()">Reset</a>
+    <a href="javascript:void(0)" class="btn btn-danger btn-lg d-block" role="button" (click)="resetGameBoard()">Reset</a>
 </div>
 
 <vitalitySquarePicker [visible]="pickerSettings.show" [targetElement]="pickerSettings.targetElement" [vitalitySquareOptions]="pickerSettings.vitalitySquareOptions" (cancel)="pickerSettings.show=false" (select)="vitalitySquarePickerSelect($event)"></vitalitySquarePicker>

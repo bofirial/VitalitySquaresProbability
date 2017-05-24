@@ -1,26 +1,26 @@
 ﻿<div class="configuration {{visible ? '' : 'hide'}}">
     <h3>Settings</h3>
-    <form (ngSubmit)="closeConfiguration()">
+    <form (ngSubmit)="closeConfiguration()" #configForm="ngForm">
         <div class="row">
-            <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <label class="form-control-label" for="vitalitySquareGameMode">Game Mode</label>
-                    <select id="vitalitySquareGameMode" class="form-control" [(ngModel)]="vitalitySquaresSettings.vitalitySquareGameMode">
+                    <select id="vitalitySquareGameMode" name="vitalitySquareGameMode" class="form-control" [(ngModel)]="vitalitySquaresSettings.vitalitySquareGameMode">
                         <option value="{{vitalitySquareGameModes.Play}}">Play Mode</option>
                         <option value="{{vitalitySquareGameModes.Edit}}">Edit Mode</option>
                     </select>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-6 col-lg-4">
-                <div class="form-group {{ !ngForm?.controls?.totalSelections?.valid && 'has-danger'}}">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="form-group {{ !totalSelections?.valid && 'has-danger'}}">
                     <label class="form-control-label" for="totalSelections">Number of Selections</label>
-                    <input id="totalSelections" type="number" class="form-control" [(ngModel)]="vitalitySquaresSettings.totalSelections" ngControl="totalSelections" total-selections [totalVitalitySquares]="totalVitalitySquares"/>
-                    <p class="text-help" [hidden]="!ngForm?.controls?.totalSelections?.errors?.greaterThanTotal">Number of Selections can not be greater than Number of Vitality Squares.</p>
-                    <p class="text-help" [hidden]="!ngForm?.controls?.totalSelections?.errors?.notInteger">Number of Selections must be an integer.</p>
-                    <p class="text-help" [hidden]="!ngForm?.controls?.totalSelections?.errors?.lessThanZero">Number of Selections must be greater than zero.</p>
+                    <input id="totalSelections" name="totalSelections" type="number" class="form-control" [(ngModel)]="vitalitySquaresSettings.totalSelections" total-selections [totalVitalitySquares]="totalVitalitySquares" #totalSelections="ngModel" />
+                    <p class="form-control-feedback" [hidden]="!totalSelections?.errors?.greaterThanTotal">Number of Selections can not be greater than Number of Vitality Squares.</p>
+                    <p class="form-control-feedback" [hidden]="!totalSelections?.errors?.notInteger">Number of Selections must be an integer.</p>
+                    <p class="form-control-feedback" [hidden]="!totalSelections?.errors?.lessThanZero">Number of Selections must be greater than zero.</p>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <label>Number of Vitality Squares</label>
                     <p class="form-control-static">{{totalVitalitySquares}}</p>
@@ -28,14 +28,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-md-6 col-lg-4" *ngFor="#vitalitySquareConfiguration of vitalitySquaresSettings.vitalitySquareConfigurations">
+            <div class="col-12 col-md-6 col-lg-4" *ngFor="let vitalitySquareConfiguration of vitalitySquaresSettings.vitalitySquareConfigurations">
                 <div class="vitalitySquareConfiguration">
-                    <div class="colorPicker pull-xs-left">
+                    <div class="colorPicker float-left">
                         <label class="form-control-label">Color</label>
                         <a href="javascript:void(0)" (click)="openColorPicker(vitalitySquareConfiguration, $event)" class="vitalitySquare {{vitalitySquareConfiguration.color}} {{vitalitySquareConfiguration.isRandomColor ? 'disabled' : ''}}">
                         </a>
                     </div>
-                    <div class="iconPicker pull-xs-right">
+                    <div class="iconPicker float-right">
                         <label class="form-control-label">Icon</label>
                         <a href="javascript:void(0)" (click)="openIconPicker(vitalitySquareConfiguration, $event)" class="vitalitySquare {{vitalitySquareConfiguration.isRandomIcon ? 'disabled' : ''}}">
                             <i class="{{vitalitySquareConfiguration.icon}}"></i>
@@ -43,26 +43,26 @@
                     </div>
                     <div class="checkbox clear">
                         <label class="form-control-label">
-                            <input type="checkbox" [(ngModel)]="vitalitySquareConfiguration.isRandomColor"> Random Color
+                            <input type="checkbox" name="isRandomColor{{vitalitySquareConfiguration.id}}" [(ngModel)]="vitalitySquareConfiguration.isRandomColor"> Random Color
                         </label>
                     </div>
                     <div class="checkbox clear">
                         <label class="form-control-label">
-                            <input type="checkbox" [(ngModel)]="vitalitySquareConfiguration.isRandomIcon"> Random Icon
+                            <input type="checkbox" name="isRandomIcon{{vitalitySquareConfiguration.id}}" [(ngModel)]="vitalitySquareConfiguration.isRandomIcon"> Random Icon
                         </label>
                     </div>
-                    <div class="form-group {{ ngForm?.controls && (ngForm?.controls['colorTotal' + vitalitySquareConfiguration.id]?.valid === false) ? 'has-danger' : ''}}">
+                    <div class="form-group {{ colorTotal.valid === false ? 'has-danger' : ''}}">
                         <label class="form-control-label">Number of <i class="{{vitalitySquareConfiguration.isRandomIcon ? 'flaticon-question30' : vitalitySquareConfiguration.icon}} {{vitalitySquareConfiguration.isRandomColor ? '' : vitalitySquareConfiguration.color}}"></i></label>
-                        <input type="number" class="form-control" [(ngModel)]="vitalitySquareConfiguration.total" ngControl="colorTotal{{vitalitySquareConfiguration.id}}" (input)="colorTotalChange()" color-total [totalVitalitySquares]="totalVitalitySquares"/>
-                        <p class="text-help" [hidden]="ngForm?.controls == null ? true : !ngForm?.controls['colorTotal' + vitalitySquareConfiguration.id]?.errors?.greaterThanMax">The Total Number of Vitality Squares can not be greater than 24.</p>
-                        <p class="text-help" [hidden]="ngForm?.controls == null ? true : !ngForm?.controls['colorTotal' + vitalitySquareConfiguration.id]?.errors?.notInteger">Number of Vitality Squares must be an integer.</p>
-                        <p class="text-help" [hidden]="ngForm?.controls == null ? true : !ngForm?.controls['colorTotal' + vitalitySquareConfiguration.id]?.errors?.lessThanZero">Number of Vitality Squares must be greater than zero.</p>
+                        <input type="number" name="colorTotal{{vitalitySquareConfiguration.id}}" class="form-control" [(ngModel)]="vitalitySquareConfiguration.total" (input)="colorTotalChange()" color-total [totalVitalitySquares]="totalVitalitySquares" #colorTotal="ngModel" />
+                        <p class="form-control-feedback" [hidden]="!colorTotal?.errors?.greaterThanMax">The Total Number of Vitality Squares can not be greater than 24.</p>
+                        <p class="form-control-feedback" [hidden]="!colorTotal?.errors?.notInteger">Number of Vitality Squares must be an integer.</p>
+                        <p class="form-control-feedback" [hidden]="!colorTotal?.errors?.lessThanZero">Number of Vitality Squares must be greater than zero.</p>
                     </div>
 
-                    <a href="javascript:void(0)" class="btn btn-danger center-block {{canRemoveConfiguration() ? '' : 'disabled'}}" (click)="removeVitalitySquareConfiguration(vitalitySquareConfiguration)">Remove</a>
+                    <a href="javascript:void(0)" class="btn btn-danger d-block {{canRemoveConfiguration() ? '' : 'disabled'}}" (click)="removeVitalitySquareConfiguration(vitalitySquareConfiguration)">Remove</a>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-4">
                 <div class="vitalitySquareConfiguration add">
                     <label>Add A Vitality Square Type</label>
                     <a href="javascript:void(0)" (click)="createNewVitalitySquareConfiguration()" class="vitalitySquare {{vitalitySquaresSettings.vitalitySquareConfigurations.length < 6 ? '' : 'disabled'}}">
@@ -71,9 +71,10 @@
                 </div>
             </div>
         </div>
-
-        <input type="submit" class="btn btn-primary center-block" value="Save" />
-</form>
+        <div class="btn-group text-center d-block" role="group" aria-label="Submit">
+            <input type="submit" class="btn btn-primary" value="Save" [disabled]="!configForm.form.valid" />
+        </div>
+    </form>
 </div>
 <vitalitySquarePicker [visible]="pickerSettings.show" [targetElement]="pickerSettings.targetElement" [vitalitySquareOptions]="pickerSettings.vitalitySquareOptions" (cancel)="pickerSettings.show=false" (select)="vitalitySquarePickerSelect($event)"></vitalitySquarePicker>
 <backdrop #backdrop [visible]="visible" [zIndex]="500" (click)="closeConfiguration()"></backdrop>

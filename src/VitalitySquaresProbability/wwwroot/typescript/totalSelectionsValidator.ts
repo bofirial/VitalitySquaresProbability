@@ -1,19 +1,22 @@
 ﻿
-import {Directive, provide, Input, OnChanges, SimpleChange} from 'angular2/core';
-import {Control, Validator, NG_VALIDATORS} from 'angular2/common';
+import { Directive, forwardRef, Input, OnChanges, SimpleChange} from '@angular/core';
+import { FormControl, Validator, NG_VALIDATORS } from '@angular/forms';
 
 
 @Directive({
     selector: '[total-selections]',
-    providers: [provide(NG_VALIDATORS, { useExisting: TotalSelectionsValidator, multi: true })]
+    providers: [
+        { provide: NG_VALIDATORS, useExisting: forwardRef(() => TotalSelectionsValidator), multi: true }
+    ]
 })
 export class TotalSelectionsValidator implements Validator, OnChanges {
     
     @Input() totalVitalitySquares: number;
+    @Input() totalSelections: string;
 
-    control: Control;
+    control: FormControl;
 
-    validate(c: Control): { [key: string]: any } {
+    validate(c: FormControl): { [key: string]: any } {
         this.control = c;
 
         if (parseInt(c.value, 10) == NaN) {

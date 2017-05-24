@@ -1,9 +1,7 @@
-﻿
-import {bootstrap} from 'angular2/platform/browser';
-import {VitalitySquaresProbabilityComponent} from "./vitalitySquaresProbabilityComponent";
-import {ProbabilityDisplayService} from "./probabilityDisplayService";
-import {ProbabilityCalculationService} from "./probabilityCalculationService";
-import {VitalitySquaresSettingsService} from "./vitalitySquaresSettingsService";
-import {VitalitySquaresGameService} from "./vitalitySquaresGameService";
+﻿//import 'zone.js';
+//import 'reflect-metadata';
 
-bootstrap(VitalitySquaresProbabilityComponent, [ProbabilityCalculationService, ProbabilityDisplayService, VitalitySquaresSettingsService, VitalitySquaresGameService]);
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app.module';
+
+platformBrowserDynamic().bootstrapModule(AppModule);

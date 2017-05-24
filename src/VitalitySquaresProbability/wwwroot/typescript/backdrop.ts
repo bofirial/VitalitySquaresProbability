@@ -1,4 +1,4 @@
-﻿import {Component, Input, OnChanges, SimpleChange, ElementRef, EventEmitter, Output} from 'angular2/core';
+﻿import {Component, Input, OnChanges, SimpleChange, ElementRef, EventEmitter, Output} from '@angular/core';
 
 @Component({
     selector: 'backdrop',
@@ -23,10 +23,14 @@ export class Backdrop implements OnChanges {
     }
 
     reset(): void {
-        setTimeout(this.ngOnChanges.bind(this, null), 100);
+        this.ngOnChanges.call(this, null);
     }
 
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {
+        setTimeout(this.updateBackdropPosition.bind(this), 100);
+    }
+
+    updateBackdropPosition() {
         var staticParent = this.element.nativeElement;
 
         while (staticParent.style.position == "absolute" || staticParent.offsetHeight == 0) {

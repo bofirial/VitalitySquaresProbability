@@ -1,24 +1,24 @@
 ﻿
-import {Component, Input, EventEmitter, Output, OnChanges, SimpleChange, ViewChild} from 'angular2/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgForm} from 'angular2/common';
+import { Component, Input, EventEmitter, Output, OnChanges, SimpleChange, ViewChild } from '@angular/core';
+import {NgForm} from '@angular/forms';
 import {VitalitySquareGameModes, VitalitySquareConfiguration, Colors, IconGroups, FlatIcons, Icons} from './vitalitySquareCore'
 import {VitalitySquaresSettingsService, VitalitySquaresSettings} from './vitalitySquaresSettingsService';
 import {VitalitySquarePicker, VitalitySquareOption, VitalitySquarePickerSettings} from './vitalitySquarePicker';
-import {TotalSelectionsValidator} from './totalSelectionsValidator';
-import {ColorTotalValidator} from './colorTotalValidator';
+//import {TotalSelectionsValidator} from './totalSelectionsValidator';
+//import {ColorTotalValidator} from './colorTotalValidator';
 import {Backdrop} from './backdrop';
 
 @Component({
     selector: 'vitality-squares-configuration',
     templateUrl: 'templates/vitalitySquaresConfiguration.html',
-    directives: [CORE_DIRECTIVES, Backdrop, VitalitySquarePicker, TotalSelectionsValidator, ColorTotalValidator]
+    //directives: [CORE_DIRECTIVES, Backdrop, VitalitySquarePicker, TotalSelectionsValidator, ColorTotalValidator]
 })
 export class VitalitySquaresConfigurationComponent implements OnChanges {
     @Input() visible: boolean;
     @Output() close = new EventEmitter();
 
     @ViewChild(Backdrop) backdrop: Backdrop;
-    @ViewChild(NgForm) ngForm: NgForm;
+    @ViewChild(NgForm) configForm: NgForm;
 
     vitalitySquaresSettingsService: VitalitySquaresSettingsService;
     vitalitySquaresSettings: VitalitySquaresSettings;
@@ -29,6 +29,9 @@ export class VitalitySquaresConfigurationComponent implements OnChanges {
 
     nextId: number = 3;
 
+    private colorPickerOptions: Array<VitalitySquareOption> = [];
+    private iconPickerOptions: Array<VitalitySquareOption> = [];
+
     pickerSettings: VitalitySquarePickerSettings = {
         show: false,
         targetElement: null,
@@ -36,8 +39,6 @@ export class VitalitySquaresConfigurationComponent implements OnChanges {
         vitalitySquareOptions: this.colorPickerOptions
     };
 
-    private colorPickerOptions: Array<VitalitySquareOption> = [];
-    private iconPickerOptions: Array<VitalitySquareOption> = [];
 
     constructor(vitalitySquaresSettingsService: VitalitySquaresSettingsService) {
         this.vitalitySquaresSettingsService = vitalitySquaresSettingsService;
@@ -229,7 +230,7 @@ export class VitalitySquaresConfigurationComponent implements OnChanges {
 
     private closeConfiguration(): void {
 
-        if (!this.ngForm.form.valid)
+        if (!this.configForm.form.valid)
         {
             return;
         }

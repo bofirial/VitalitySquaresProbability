@@ -1,19 +1,22 @@
 ﻿
-import {Directive, provide, Input, OnChanges, SimpleChange} from 'angular2/core';
-import {Control, Validator, NG_VALIDATORS} from 'angular2/common';
+import { Directive, forwardRef, Input, OnChanges, SimpleChange } from '@angular/core';
+import { FormControl, Validator, NG_VALIDATORS } from '@angular/forms';
 
 
 @Directive({
     selector: '[color-total]',
-    providers: [provide(NG_VALIDATORS, { useExisting: ColorTotalValidator, multi: true })]
+    providers: [
+        { provide: NG_VALIDATORS, useExisting: forwardRef(() => ColorTotalValidator), multi: true }
+    ]
 })
 export class ColorTotalValidator implements Validator, OnChanges {
 
     @Input() totalVitalitySquares: number;
+    @Input() colorTotal: string;
 
-    control: Control;
+    control: FormControl;
 
-    validate(c: Control): { [key: string]: any } {
+    validate(c: FormControl): { [key: string]: any } {
         this.control = c;
 
         if (parseInt(c.value, 10) == NaN) {
@@ -24,7 +27,7 @@ export class ColorTotalValidator implements Validator, OnChanges {
             return { lessThanZero: true };
         }
 
-        if (this.totalVitalitySquares > 24) {
+        if (this.totalVitalitySquares > 30) {
             return { greaterThanMax: true };
         }
 

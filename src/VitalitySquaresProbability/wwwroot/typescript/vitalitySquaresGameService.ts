@@ -1,4 +1,4 @@
-﻿import {Injectable} from 'angular2/core';
+﻿import { Injectable } from '@angular/core';
 
 import {VitalitySquare, FlatIcons} from './vitalitySquareCore';
 import {VitalitySquaresSettingsService, VitalitySquaresSettings} from './vitalitySquaresSettingsService';

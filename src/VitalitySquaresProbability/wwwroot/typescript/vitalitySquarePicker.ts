@@ -1,5 +1,5 @@
-﻿import {Component, Input, OnChanges, SimpleChange, ElementRef, EventEmitter, Output} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
+﻿import { Component, Input, OnChanges, SimpleChange, ElementRef, EventEmitter, Output } from '@angular/core';
+//import {CORE_DIRECTIVES} from '@angular/common';
 import {VitalitySquare} from './vitalitySquareCore';
 import {Backdrop} from './backdrop';
 
@@ -17,7 +17,7 @@ export class VitalitySquarePickerSettings {
 @Component({
     selector: 'vitalitySquarePicker',
     templateUrl: 'templates/vitalitySquarePicker.html',
-    directives: [CORE_DIRECTIVES, Backdrop]
+    //directives: [Backdrop]
 })
 export class VitalitySquarePicker implements OnChanges {
 
@@ -31,6 +31,7 @@ export class VitalitySquarePicker implements OnChanges {
     currentPageOptions: Array<VitalitySquareOption>;
     currentPage: number;
     lastPage: number;
+    pageNumbers: Array<number>;
 
     private visibility: string;
     private xPosition: string;
@@ -97,6 +98,7 @@ export class VitalitySquarePicker implements OnChanges {
             this.yPosition = yPos + "px";
 
             this.lastPage = Math.ceil(this.vitalitySquareOptions.length / 3);
+            this.pageNumbers = Array(this.lastPage).fill(1).map((x, i) => i+1);
 
             this.setCurrentPage();
         }
