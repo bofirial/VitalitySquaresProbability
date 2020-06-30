@@ -39,7 +39,7 @@
     "reflect-metadata": "0.1.10",
 
     "bootstrap": "4.0.0-alpha.6",
-    "jquery": "3.4.0",
+    "jquery": "3.5.1",
     "tether": "1.4.0"
   }
 }
